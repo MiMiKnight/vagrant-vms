@@ -1,0 +1,93 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  # box镜像
+  config.vm.box = "mimiknight/ubuntu-24.04-server-amd64"
+  # box版本
+  config.vm.box_version = "1.0.0"
+  # 公共Shell
+  config.vm.provision "shell", path: "script/vm_public.sh"
+  
+  config.vm.define "mysql" do |mysql|
+    # OnlyHost网卡
+    mysql.vm.network "private_network", ip: "192.168.201.1",netmask: "24"
+    # Disk
+    mysql.vm.disk :disk, size: "65GB", primary: true
+    # provider
+    mysql.vm.provider "virtualbox" do |vb|
+      # 虚拟机名称
+      #vb.name = "DevMySQL"
+      # 图形化
+      vb.gui = false
+      # 内存
+      vb.memory = "2048"
+      # cpu
+      vb.cpus = 2
+    end
+    # shell
+    #mysql.vm.provision "shell", path: "script/vm_mysql.sh"
+  end
+  
+  config.vm.define "mariadb" do |mariadb|
+    # OnlyHost网卡
+    mariadb.vm.network "private_network", ip: "192.168.201.2",netmask: "24"
+    # Disk
+    mariadb.vm.disk :disk, size: "65GB", primary: true
+    # provider
+    mariadb.vm.provider "virtualbox" do |vb|
+      # 虚拟机名称
+      #vb.name = "DevMariaDB"
+      # 图形化
+      vb.gui = false
+      # 内存
+      vb.memory = "2048"
+      # cpu
+      vb.cpus = 2
+    end
+    # shell
+    mariadb.vm.provision "shell", path: "script/vm_mariadb.sh"
+  end
+  
+  config.vm.define "redis" do |redis|
+    # OnlyHost网卡
+    redis.vm.network "private_network", ip: "192.168.201.3",netmask: "24"
+    # Disk
+    redis.vm.disk :disk, size: "65GB", primary: true
+    # provider
+    redis.vm.provider "virtualbox" do |vb|
+      # 虚拟机名称
+      #vb.name = "DevRedis"
+      # 图形化
+      vb.gui = false
+      # 内存
+      vb.memory = "2048"
+      # cpu
+      vb.cpus = 2
+    end
+    # shell
+    redis.vm.provision "shell", path: "script/vm_redis.sh"
+  end
+
+  config.vm.define "nacos" do |nacos|
+    # OnlyHost网卡
+    nacos.vm.network "private_network", ip: "192.168.201.4",netmask: "24"
+    # Disk
+    nacos.vm.disk :disk, size: "65GB", primary: true
+    # provider
+    nacos.vm.provider "virtualbox" do |vb|
+      # 虚拟机名称
+      #vb.name = "DevNacos"
+      # 图形化
+      vb.gui = false
+      # 内存
+      vb.memory = "2048"
+      # cpu
+      vb.cpus = 2
+    end
+    # shell
+    nacos.vm.provision "shell", path: "script/vm_nacos.sh"
+  end
+  
+end

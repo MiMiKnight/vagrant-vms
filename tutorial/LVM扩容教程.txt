@@ -1,0 +1,27 @@
+
+# 虚拟机扩容后，不识别磁盘容量
+安装parted工具 执行"parted -l"命令 输入fix修复
+apt-get install -y parted
+parted -l
+fix
+
+# 分区/dev/sda5 (分区类型 LVM类型 8e00)
+gdisk /dev/sda
+
+# 分区后后不重启刷新分区表
+~# partprobe
+
+# 创建PV
+pvcreate /dev/sda5
+
+# VG扩容
+vgextend vg-root /dev/sda5
+
+# LV扩容(使用VG全部容量)
+lvextend -l +100%FREE /dev/vg-root/lv-root
+
+# 刷新逻辑卷
+resize2fs /dev/vg-root/lv-root
+
+# 查看挂载点扩容情况
+df -Th
