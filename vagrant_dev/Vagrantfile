@@ -14,8 +14,8 @@ Vagrant.configure("2") do |config|
     # OnlyHost网卡
     mysql.vm.network "private_network", ip: "192.168.201.1",netmask: "24"
     # Disk
-    mysql.vm.disk :disk, size: "65GB", name: "disk-001", primary: true
-    mysql.vm.disk :disk, size: "200GB", name: "disk-002", primary: false
+    mysql.vm.disk :disk, size: "65GB", name: "box-disk-001", primary: true
+    mysql.vm.disk :disk, size: "200GB", name: "box-disk-002", primary: false
     # provider
     mysql.vm.provider "virtualbox" do |vb|
       # 虚拟机名称
@@ -35,8 +35,8 @@ Vagrant.configure("2") do |config|
     # OnlyHost网卡
     mariadb.vm.network "private_network", ip: "192.168.201.2",netmask: "24"
     # Disk
-    mariadb.vm.disk :disk, size: "65GB", name: "disk-001", primary: true
-    mariadb.vm.disk :disk, size: "200GB", name: "disk-002", primary: false
+    mariadb.vm.disk :disk, size: "65GB", name: "box-disk-001", primary: true
+    mariadb.vm.disk :disk, size: "200GB", name: "box-disk-002", primary: false
     # provider
     mariadb.vm.provider "virtualbox" do |vb|
       # 虚拟机名称
@@ -56,8 +56,8 @@ Vagrant.configure("2") do |config|
     # OnlyHost网卡
     redis.vm.network "private_network", ip: "192.168.201.3",netmask: "24"
     # Disk
-    redis.vm.disk :disk, size: "65GB", name: "disk-001", primary: true
-    redis.vm.disk :disk, size: "200GB", name: "disk-002", primary: false
+    redis.vm.disk :disk, size: "65GB", name: "box-disk-001", primary: true
+    redis.vm.disk :disk, size: "200GB", name: "box-disk-002", primary: false
     # provider
     redis.vm.provider "virtualbox" do |vb|
       # 虚拟机名称
@@ -77,8 +77,8 @@ Vagrant.configure("2") do |config|
     # OnlyHost网卡
     nacos.vm.network "private_network", ip: "192.168.201.4",netmask: "24"
     # Disk
-    nacos.vm.disk :disk, size: "65GB", name: "disk-001", primary: true
-    nacos.vm.disk :disk, size: "200GB", name: "disk-002", primary: false
+    nacos.vm.disk :disk, size: "65GB", name: "box-disk-001", primary: true
+    nacos.vm.disk :disk, size: "200GB", name: "box-disk-002", primary: false
     # provider
     nacos.vm.provider "virtualbox" do |vb|
       # 虚拟机名称

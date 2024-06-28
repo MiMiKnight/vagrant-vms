@@ -11,15 +11,16 @@ sudo sed -i "s@http://.*security.ubuntu.com@http://repo.huaweicloud.com@g" /etc/
 sudo apt-get update
 # 更新更新已经安装的软件并解决相关依赖问题
 sudo apt-get dist-upgrade -y
-# 删除系统中不再需要的软件包及其依赖项
-sudo apt-get autoremove
-# 清理已经安装的软件包
-sudo apt-get autoclean
 # 安装系统基础软件
 sudo apt-get install -y \
   vim iputils-ping net-tools lrzsz gcc \
   ntp ntpdate gdisk parted telnet
 # 设置NTP服务器
-sudo ntpdate ntp.vm.mimiknight.cn
+# sudo ntpdate ntp.vm.mimiknight.cn
+sudo ntpdate ntp.aliyun.com
+# 删除系统中不再需要的软件包及其依赖项
+sudo apt-get autoremove
+# 清理已经安装的软件包
+sudo apt-get autoclean
 # 输出提示
 sudo echo "Run public shell script finished !!!"
