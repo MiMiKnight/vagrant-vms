@@ -1,13 +1,13 @@
 #!/bin/bash
 sudo apt-get install -y tlc expect
 
-/usr/bin/expect <<EOF
+sudo /usr/bin/expect <<EOF
 set timeout 300
 spawn parted -l
 expect {
   "Fix/Ignore?" { send "Fix\r" }
 }
-spawn gdisk /dev/sda
+spawn gdisk /dev/sdb
 expect {
   "Command (? for help):" { send "?\r" }
   "Command (? for help):" { send "n\r" }
