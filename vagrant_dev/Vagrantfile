@@ -14,10 +14,8 @@ Vagrant.configure("2") do |config|
     # OnlyHost网卡
     mysql.vm.network "private_network", ip: "192.168.201.1",netmask: "24"
     # Disk
-    (1..2).each do |i|
-      mysql.vm.disk :disk, size: "65GB", name: "disk-#{i}", primary: true
-      mysql.vm.disk :disk, size: "200GB", name: "disk-#{i}", primary: false
-    end
+    mysql.vm.disk :disk, size: "65GB", name: "disk-001", primary: true
+    mysql.vm.disk :disk, size: "200GB", name: "disk-002", primary: false
     # provider
     mysql.vm.provider "virtualbox" do |vb|
       # 虚拟机名称
@@ -37,10 +35,8 @@ Vagrant.configure("2") do |config|
     # OnlyHost网卡
     mariadb.vm.network "private_network", ip: "192.168.201.2",netmask: "24"
     # Disk
-    (1..3).each do |i|
-      mariadb.vm.disk :disk, size: "65GB", name: "disk-#{i}", primary: true
-      mariadb.vm.disk :disk, size: "200GB", name: "disk-#{i}", primary: false
-    end
+    mariadb.vm.disk :disk, size: "65GB", name: "disk-001", primary: true
+    mariadb.vm.disk :disk, size: "200GB", name: "disk-002", primary: false
     # provider
     mariadb.vm.provider "virtualbox" do |vb|
       # 虚拟机名称
@@ -60,10 +56,8 @@ Vagrant.configure("2") do |config|
     # OnlyHost网卡
     redis.vm.network "private_network", ip: "192.168.201.3",netmask: "24"
     # Disk
-    (1..3).each do |i|
-      redis.vm.disk :disk, size: "65GB", name: "disk-#{i}", primary: true
-      redis.vm.disk :disk, size: "200GB", name: "disk-#{i}", primary: false
-    end
+    redis.vm.disk :disk, size: "65GB", name: "disk-001", primary: true
+    redis.vm.disk :disk, size: "200GB", name: "disk-002", primary: false
     # provider
     redis.vm.provider "virtualbox" do |vb|
       # 虚拟机名称
@@ -83,10 +77,8 @@ Vagrant.configure("2") do |config|
     # OnlyHost网卡
     nacos.vm.network "private_network", ip: "192.168.201.4",netmask: "24"
     # Disk
-    (1..3).each do |i|
-      nacos.vm.disk :disk, size: "65GB", name: "disk-#{i}", primary: true
-      nacos.vm.disk :disk, size: "200GB", name: "disk-#{i}", primary: false
-    end
+    nacos.vm.disk :disk, size: "65GB", name: "disk-001", primary: true
+    nacos.vm.disk :disk, size: "200GB", name: "disk-002", primary: false
     # provider
     nacos.vm.provider "virtualbox" do |vb|
       # 虚拟机名称
