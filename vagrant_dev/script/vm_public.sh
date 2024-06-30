@@ -14,10 +14,10 @@ sudo apt-get dist-upgrade -y
 # 安装系统基础软件
 sudo apt-get install -y \
   vim iputils-ping net-tools lrzsz gcc \
-  ntp ntpdate gdisk parted telnet
+  ntp ntpdate gdisk parted telnet tcl expect
 # 设置NTP服务器
-# sudo ntpdate ntp.vm.mimiknight.cn
-sudo ntpdate ntp.aliyun.com
+sudo ntpdate ntp.vm.mimiknight.cn
+#sudo ntpdate ntp.aliyun.com
 # 删除系统中不再需要的软件包及其依赖项
 sudo apt-get autoremove
 # 清理已经安装的软件包
