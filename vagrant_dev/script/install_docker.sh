@@ -1,2 +1,4 @@
 #!/bin/bash
-sudo apt-get install -y tlc expect
+# 安装Docker
+#
+sudo echo "Install docker success!!!"

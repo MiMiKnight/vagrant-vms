@@ -1,2 +1,4 @@
 【backup】
 .vagrant
+vagrant_dev/conf
+vagrant_dev/soft

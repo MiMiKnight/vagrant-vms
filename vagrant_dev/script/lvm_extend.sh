@@ -1,9 +1,9 @@
 #!/bin/bash
 # 扩容大小
 capacity=$1
-[ ! $1 ] && capacity='+50G'
+[ ! $1 ] && capacity='+100G'
 # 安装自动交互工具expect
-sudo apt-get install -y tcl expect
+# sudo apt-get install -y tcl expect
 # LVM自动扩容
 sudo /usr/bin/expect << EOF
 set timeout 60
