@@ -30,7 +30,7 @@ Vagrant.configure("2") do |config|
     # shell
     mysql.vm.provision "shell", path: "script/vm_mysql.sh"
     mysql.vm.provision "shell", path: "script/lvm_extend.sh"
-    mysql.vm.provision "shell", path: "script/install_mysql_online.sh"
+    mysql.vm.provision "shell", path: "script/install_mysql.sh"
   end
   
   config.vm.define "mariadb" do |mariadb|

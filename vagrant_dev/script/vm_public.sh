@@ -1,5 +1,6 @@
 #!/bin/bash
-set -ex
+# 显示指令及参数
+sudo set -ex
 # 安装wget
 sudo apt-get install -y wget
 # 备份软件源
