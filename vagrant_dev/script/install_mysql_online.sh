@@ -207,9 +207,9 @@ EOF
 sudo systemctl restart mysqld
 # 查看MySQL状态
 sudo systemctl status mysqld
+# 清理
+sudo rm -rf /opt/backup/mysql-8.0.37
+sudo apt-get autoclean
 # 切换vagrant用户
 sudo su - vagrant
-
-sudo apt-get autoclean
-#
 sudo echo "Install MySQL success!!!"
