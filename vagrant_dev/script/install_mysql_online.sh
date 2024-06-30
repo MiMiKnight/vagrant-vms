@@ -191,12 +191,14 @@ sudo systemctl enable mysqld.service
 sudo systemctl start mysqld
 # 查看MySQL状态
 sudo systemctl status mysqld
-# 重置MySQL密码
 sudo /usr/bin/expect << EOF
 set timeout 60
 spawn /usr/local/mysql/bin/mysql -u root -p
 expect "Enter password:" { send "\r" }
 expect "mysql>" { send "alter user 'root'@'localhost' identified by '123456';\r" }
+expect "mysql>" { send "use mysql;\r" }
+expect "mysql>" { send "select host,user from user;\r" }
+expect "mysql>" { send "update user set host='%' where user='root';\r" }
 expect "mysql>" { send "flush privileges;\r" }
 expect "mysql>" { send "quit;\r" }
 expect eof
@@ -207,7 +209,7 @@ sudo systemctl restart mysqld
 sudo systemctl status mysqld
 # 切换vagrant用户
 sudo su - vagrant
-# 清理
+
 sudo apt-get autoclean
 #
 sudo echo "Install MySQL success!!!"
