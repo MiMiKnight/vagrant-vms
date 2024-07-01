@@ -3,11 +3,6 @@
 # 官方安装教程链接  https://dev.mysql.com/doc/mysql-secure-deployment-guide/8.0/en/secure-deployment-install.html
 # 显示指令及参数
 sudo set -ex
-# 错误退出函数
-error_exit (){
-  echo "ERROR: $1 !!"
-  exit 1
-}
 # 切换root用户
 sudo su - root
 # 创建基本目录
