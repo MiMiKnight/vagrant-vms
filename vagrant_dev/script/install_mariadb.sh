@@ -29,17 +29,19 @@ sudo apt-cache search libaio
 sudo apt-get install -y libaio-dev
 sudo apt-get install -y libaio1t64
 sudo apt-get install -y libncurses*
+sudo apt-get install -y libncurses5
 # 解压安装 mysql tar.xz 压缩包
 sudo tar xf /opt/backup/mariadb-11.4.2-linux-systemd-x86_64.tar.gz \
   --directory /opt/app/mariadb
+
 # 修改目录用户属性
 chown -R mysql:mysql /opt/app/mariadb
 chown -R mysql:mysql /opt/workspace/mariadb
 # 建立软链接
 sudo ln -s /opt/app/mariadb/mariadb-11.4.2-linux-systemd-x86_64 /usr/local/mysql
-chown -R mysql:mysql /usr/local/mysql
-ln -s /opt/workspace/mariadb/data /usr/local/mysql/data
-chown -R mysql:mysql /usr/local/mysql/data
+sudo chown -R mysql:mysql /usr/local/mysql
+sudo ln -s /opt/workspace/mariadb/data /usr/local/mysql/data
+sudo chown -R mysql:mysql /usr/local/mysql/data
 # 设置MySQL环境变量
 sudo cat > /etc/profile.d/mariadb.sh << EOF
 export MARIADB_HOME=/usr/local/mysql

@@ -10,9 +10,9 @@ Vagrant.configure("2") do |config|
   # 公共Shell
   config.vm.provision "shell", path: "script/vm_public.sh"
   
-  config.vm.define "mysql" do |host|
+  config.vm.define "master01" do |host|
     # OnlyHost网卡
-    host.vm.network "private_network", ip: "192.168.201.1",netmask: "24"
+    host.vm.network "private_network", ip: "192.168.201.51",netmask: "24"
     # Disk
     host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
     host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false
@@ -28,14 +28,13 @@ Vagrant.configure("2") do |config|
       vb.cpus = 2
     end
     # shell
-    host.vm.provision "shell", path: "script/vm_mysql.sh"
+    host.vm.provision "shell", path: "script/vm_master01.sh"
     host.vm.provision "shell", path: "script/lvm_extend.sh"
-    host.vm.provision "shell", path: "script/install_mysql.sh"
   end
   
-  config.vm.define "mariadb" do |host|
+  config.vm.define "master02" do |host|
     # OnlyHost网卡
-    host.vm.network "private_network", ip: "192.168.201.2",netmask: "24"
+    host.vm.network "private_network", ip: "192.168.201.52",netmask: "24"
     # Disk
     host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
     host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false
@@ -51,13 +50,13 @@ Vagrant.configure("2") do |config|
       vb.cpus = 2
     end
     # shell
-    host.vm.provision "shell", path: "script/vm_mariadb.sh"
+    host.vm.provision "shell", path: "script/vm_master02.sh"
     host.vm.provision "shell", path: "script/lvm_extend.sh"
   end
   
-  config.vm.define "redis" do |host|
+  config.vm.define "master03" do |host|
     # OnlyHost网卡
-    host.vm.network "private_network", ip: "192.168.201.3",netmask: "24"
+    host.vm.network "private_network", ip: "192.168.201.53",netmask: "24"
     # Disk
     host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
     host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false
@@ -73,13 +72,13 @@ Vagrant.configure("2") do |config|
       vb.cpus = 2
     end
     # shell
-    host.vm.provision "shell", path: "script/vm_redis.sh"
+    host.vm.provision "shell", path: "script/vm_master03.sh"
     host.vm.provision "shell", path: "script/lvm_extend.sh"
   end
 
-  config.vm.define "nacos" do |host|
+  config.vm.define "node01" do |host|
     # OnlyHost网卡
-    host.vm.network "private_network", ip: "192.168.201.4",netmask: "24"
+    host.vm.network "private_network", ip: "192.168.201.54",netmask: "24"
     # Disk
     host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
     host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false
@@ -95,7 +94,51 @@ Vagrant.configure("2") do |config|
       vb.cpus = 2
     end
     # shell
-    host.vm.provision "shell", path: "script/vm_nacos.sh"
+    host.vm.provision "shell", path: "script/vm_node01.sh"
+    host.vm.provision "shell", path: "script/lvm_extend.sh"
+  end
+
+  config.vm.define "node02" do |host|
+    # OnlyHost网卡
+    host.vm.network "private_network", ip: "192.168.201.55",netmask: "24"
+    # Disk
+    host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
+    host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false
+    # provider
+    host.vm.provider "virtualbox" do |vb|
+      # 虚拟机名称
+      #vb.name = "DevNacos"
+      # 图形化
+      vb.gui = false
+      # 内存
+      vb.memory = "2048"
+      # cpu
+      vb.cpus = 2
+    end
+    # shell
+    host.vm.provision "shell", path: "script/vm_node02.sh"
+    host.vm.provision "shell", path: "script/lvm_extend.sh"
+  end
+
+  config.vm.define "node03" do |host|
+    # OnlyHost网卡
+    host.vm.network "private_network", ip: "192.168.201.56",netmask: "24"
+    # Disk
+    host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
+    host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false
+    # provider
+    host.vm.provider "virtualbox" do |vb|
+      # 虚拟机名称
+      #vb.name = "DevNacos"
+      # 图形化
+      vb.gui = false
+      # 内存
+      vb.memory = "2048"
+      # cpu
+      vb.cpus = 2
+    end
+    # shell
+    host.vm.provision "shell", path: "script/vm_node03.sh"
     host.vm.provision "shell", path: "script/lvm_extend.sh"
   end
   
