@@ -51,7 +51,7 @@ Vagrant.configure("2") do |config|
     end
     # shell
     host.vm.provision "shell", path: "script/vm_redis.sh"
-    #host.vm.provision "shell", path: "script/install_redis.sh"
+    host.vm.provision "shell", path: "script/install_redis.sh"
   end
   
 end
