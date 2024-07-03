@@ -18,5 +18,12 @@ sudo apt-cache madison redis | awk 'NR == 1'  | awk {'print $3'}
 sudo apt-get install -y redis=`sudo apt-cache madison redis | awk 'NR == 1'  | awk {'print $3'}`
 # 查看redis版本
 sudo redis-server --version
+# 配置文件位置 /etc/redis/redis.conf
+# 修改密码（密码：123456）
+sed -i 's/# requirepass foobared/requirepass 123456/g' /etc/redis/redis.conf
+awk '/^requirepass /{print $0}' /etc/redis/redis.conf
+# 修改ip
+sed -i 's/bind 127.0.0.1 -::1/bind 0.0.0.0/g' /etc/redis/redis.conf
+awk '/^bind 0.0.0.0/{print $0}' /etc/redis/redis.conf
 #
 sudo echo "Install docker success!!!"
