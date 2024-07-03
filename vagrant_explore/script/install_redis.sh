@@ -18,6 +18,8 @@ sudo apt-cache madison redis | awk 'NR == 1'  | awk {'print $3'}
 sudo apt-get install -y redis=`sudo apt-cache madison redis | awk 'NR == 1'  | awk {'print $3'}`
 # 查看redis版本
 sudo redis-server --version
+# 查看是否新增用户成功
+awk '/redis/{print $0}' /etc/passwd
 # 配置文件位置 /etc/redis/redis.conf
 # 修改密码（密码：123456）
 sed -i 's/# requirepass foobared/requirepass 123456/g' /etc/redis/redis.conf
@@ -25,5 +27,18 @@ awk '/^requirepass /{print $0}' /etc/redis/redis.conf
 # 修改ip
 sed -i 's/bind 127.0.0.1 -::1/bind 0.0.0.0/g' /etc/redis/redis.conf
 awk '/^bind 0.0.0.0/{print $0}' /etc/redis/redis.conf
+# 自启动配置文件 /usr/lib/systemd/system/redis-server.service
+# 重载配置文件
+systemctl daemon-reload
+# 设置自启动
+systemctl enable redis-server.service
+# 查看自启动状态
+systemctl is-enabled redis-server.service
+# 关闭服务
+systemctl stop redis-server.service
+#  启动服务
+systemctl start redis-server.service
+# 查看服务启动状态
+systemctl status redis-server.service
 #
 sudo echo "Install redis success!!!"
