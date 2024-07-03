@@ -26,4 +26,4 @@ awk '/^requirepass /{print $0}' /etc/redis/redis.conf
 sed -i 's/bind 127.0.0.1 -::1/bind 0.0.0.0/g' /etc/redis/redis.conf
 awk '/^bind 0.0.0.0/{print $0}' /etc/redis/redis.conf
 #
-sudo echo "Install docker success!!!"
+sudo echo "Install redis success!!!"
