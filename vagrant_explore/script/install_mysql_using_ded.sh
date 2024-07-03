@@ -19,9 +19,10 @@ sudo tar -xvf /opt/backup/mysql-server_8.0.37-1ubuntu24.04_amd64.deb-bundle.tar 
 #
 sudo apt-get install apt-utils
 # Preconfigure the MySQL server package with the following command:
+# sudo dpkg-preconfigure -f readline /opt/backup/mysql-8.0.37/mysql-community-server_*.deb
 sudo /usr/bin/expect << EOF
 set timeout 60
-spawn sudo dpkg-preconfigure -f readline /opt/backup/mysql-8.0.37/mysql-community-server_*.deb
+spawn sudo dpkg-preconfigure -f readline /opt/backup/mysql-8.0.37/mysql-community-server_8.0.37-1ubuntu24.04_amd64.deb
 expect "Enter root password:" { send "123456\r" }
 expect "Re-enter root password:" { send "123456\r" }
 expect "Select default authentication plugin" { send "1\r" }
