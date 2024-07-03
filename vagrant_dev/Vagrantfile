@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
     # provider
     host.vm.provider "virtualbox" do |vb|
       # 虚拟机名称
-      #vb.name = "DevMySQL"
+      #vb.name = "xxx"
       # 图形化
       vb.gui = false
       # 内存
@@ -42,7 +42,7 @@ Vagrant.configure("2") do |config|
     # provider
     host.vm.provider "virtualbox" do |vb|
       # 虚拟机名称
-      #vb.name = "DevMariaDB"
+      #vb.name = "xxx"
       # 图形化
       vb.gui = false
       # 内存
@@ -60,11 +60,10 @@ Vagrant.configure("2") do |config|
     host.vm.network "private_network", ip: "192.168.201.3",netmask: "24"
     # Disk
     host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
-    host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false
     # provider
     host.vm.provider "virtualbox" do |vb|
       # 虚拟机名称
-      #vb.name = "DevRedis"
+      #vb.name = "xxx"
       # 图形化
       vb.gui = false
       # 内存
@@ -74,7 +73,6 @@ Vagrant.configure("2") do |config|
     end
     # shell
     host.vm.provision "shell", path: "script/vm_redis.sh"
-    host.vm.provision "shell", path: "script/lvm_extend.sh"
   end
 
   config.vm.define "nacos" do |host|
@@ -86,7 +84,7 @@ Vagrant.configure("2") do |config|
     # provider
     host.vm.provider "virtualbox" do |vb|
       # 虚拟机名称
-      #vb.name = "DevNacos"
+      #vb.name = "xxx"
       # 图形化
       vb.gui = false
       # 内存
