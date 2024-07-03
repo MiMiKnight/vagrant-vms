@@ -1,0 +1,36 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  # box镜像
+  config.vm.box = "MiMiKnight/ubuntu-24.04-server-amd64"
+  # box版本
+  config.vm.box_version = "1.0.0"
+  # 公共Shell
+  config.vm.provision "shell", path: "script/vm_public.sh"
+  
+  config.vm.define "mysql" do |host|
+    # OnlyHost网卡
+    host.vm.network "private_network", ip: "192.168.202.1",netmask: "24"
+    # Disk
+    host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
+    host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false
+    # provider
+    host.vm.provider "virtualbox" do |vb|
+      # 虚拟机名称
+      #vb.name = "DevMySQL"
+      # 图形化
+      vb.gui = false
+      # 内存
+      vb.memory = "2048"
+      # cpu
+      vb.cpus = 2
+    end
+    # shell
+    host.vm.provision "shell", path: "script/vm_mysql.sh"
+    host.vm.provision "shell", path: "script/lvm_extend.sh"
+    host.vm.provision "shell", path: "script/install_mysql_using_ded.sh"
+  end
+  
+end
