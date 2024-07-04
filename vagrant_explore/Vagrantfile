@@ -75,4 +75,28 @@ Vagrant.configure("2") do |config|
     host.vm.provision "shell", path: "script/install_docker.sh"
   end
   
+  config.vm.define "harbor" do |host|
+    # OnlyHost网卡
+    host.vm.network "private_network", ip: "192.168.202.4",netmask: "24"
+    # Disk
+    host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
+    host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false
+    # provider
+    host.vm.provider "virtualbox" do |vb|
+      # 虚拟机名称
+      #vb.name = "xxx"
+      # 图形化
+      vb.gui = false
+      # 内存
+      vb.memory = "8192"
+      # cpu
+      vb.cpus = 4
+    end
+    # shell
+    host.vm.provision "shell", path: "script/vm_harbor.sh"
+    host.vm.provision "shell", path: "script/lvm_extend.sh"
+    host.vm.provision "shell", path: "script/install_docker.sh"
+    host.vm.provision "shell", path: "script/install_harbor.sh"
+  end
+  
 end
