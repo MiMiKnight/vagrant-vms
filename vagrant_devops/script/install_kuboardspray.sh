@@ -1,11 +1,14 @@
 #!/bin/bash
+# 安装教程 https://kuboard-spray.cn/
+# Kuboard-Spray 的默认用户名是 admin，默认密码是 Kuboard123
+# 访问链接：http://kuboardspray.devops.vm.mimiknight.cn/#/login
 # 显示指令及参数
 sudo set -ex
 #
-mkdir -p \
+sudo mkdir -p \
  /opt/workspace/data/kuboard-spray
 #
-docker pull swr.cn-east-2.myhuaweicloud.com/kuboard/kuboard-spray:v1.2.4-amd64
+sudo docker pull swr.cn-east-2.myhuaweicloud.com/kuboard/kuboard-spray:v1.2.4-amd64
 #
 sudo docker run -d \
   --privileged \
@@ -17,4 +20,4 @@ sudo docker run -d \
   -v /opt/workspace/data/kuboard-spray:/data \
   swr.cn-east-2.myhuaweicloud.com/kuboard/kuboard-spray:v1.2.4-amd64
 #
-sudo echo "Install KuboardSpray VM finished !!!"
+sudo echo "Install KuboardSpray finished !!!"
