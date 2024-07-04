@@ -23,5 +23,16 @@ sudo ntpdate ntp.vm.mimiknight.cn
 sudo apt-get autoremove
 # 清理已经安装的软件包
 sudo apt-get autoclean
+######################禁用swap#######################
+# 查看是否swap分区
+sudo swapon --show
+# 临时禁用swap分区
+sudo swapoff -a
+# 永久禁用swap分区
+sed -i '8s/^/# /g' /etc/fstab
+# 查看是否swap分区
+sudo swapon --show
+sudo free -h
+####################################################
 # 输出提示
 sudo echo "Run public shell script finished !!!"
