@@ -45,7 +45,7 @@ Vagrant.configure("2") do |config|
       # 图形化
       vb.gui = false
       # 内存
-      vb.memory = "8192"
+      vb.memory = "4096"
       # cpu
       vb.cpus = 4
     end
@@ -67,7 +67,7 @@ Vagrant.configure("2") do |config|
       # 图形化
       vb.gui = false
       # 内存
-      vb.memory = "8192"
+      vb.memory = "4096"
       # cpu
       vb.cpus = 4
     end
@@ -76,7 +76,7 @@ Vagrant.configure("2") do |config|
     host.vm.provision "shell", path: "script/lvm_extend.sh"
   end
 
-  config.vm.define "node01" do |host|
+  config.vm.define "work01" do |host|
     # OnlyHost网卡
     host.vm.network "private_network", ip: "192.168.201.54",netmask: "24"
     # Disk
@@ -89,7 +89,7 @@ Vagrant.configure("2") do |config|
       # 图形化
       vb.gui = false
       # 内存
-      vb.memory = "10240"
+      vb.memory = "12288"
       # cpu
       vb.cpus = 8
     end
@@ -98,7 +98,7 @@ Vagrant.configure("2") do |config|
     host.vm.provision "shell", path: "script/lvm_extend.sh"
   end
 
-  config.vm.define "node02" do |host|
+  config.vm.define "work02" do |host|
     # OnlyHost网卡
     host.vm.network "private_network", ip: "192.168.201.55",netmask: "24"
     # Disk
@@ -111,7 +111,7 @@ Vagrant.configure("2") do |config|
       # 图形化
       vb.gui = false
       # 内存
-      vb.memory = "10240"
+      vb.memory = "12288"
       # cpu
       vb.cpus = 8
     end
@@ -120,7 +120,7 @@ Vagrant.configure("2") do |config|
     host.vm.provision "shell", path: "script/lvm_extend.sh"
   end
 
-  config.vm.define "node03" do |host|
+  config.vm.define "work03" do |host|
     # OnlyHost网卡
     host.vm.network "private_network", ip: "192.168.201.56",netmask: "24"
     # Disk
@@ -133,7 +133,7 @@ Vagrant.configure("2") do |config|
       # 图形化
       vb.gui = false
       # 内存
-      vb.memory = "10240"
+      vb.memory = "12288"
       # cpu
       vb.cpus = 8
     end
