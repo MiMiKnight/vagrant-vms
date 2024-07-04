@@ -8,29 +8,102 @@ Vagrant.configure("2") do |config|
   # box版本
   config.vm.box_version = "1.0.0"
   # 公共Shell
-  config.vm.provision "shell", inline: <<-SHELL
-    sudo apt-get install -y wget
-    sudo cp /etc/apt/sources.list.d/ubuntu.sources /etc/apt/sources.list.d/ubuntu.sources.bak
-    sudo sed -i "s@http://.*archive.ubuntu.com@http://repo.huaweicloud.com@g" /etc/apt/sources.list.d/ubuntu.sources
-    sudo sed -i "s@http://.*security.ubuntu.com@http://repo.huaweicloud.com@g" /etc/apt/sources.list.d/ubuntu.sources
-    sudo apt-get update
-    sudo apt-get dist-upgrade -y
-    sudo apt-get autoremove
-    sudo apt-get autoclean
-    sudo apt-get install -y \
-      vim iputils-ping net-tools lrzsz gcc \
-      ntp ntpdate gdisk telnet
-    sudo ntpdate ntp.vm.mimiknight.cn
-    sudo echo "Run common shell finished !!!"
-  SHELL
+  config.vm.provision "shell", path: "script/vm_public.sh"
   
-  config.vm.define "jenkins" do |jenkins|
+  config.vm.define "mysql" do |host|
     # OnlyHost网卡
-    jenkins.vm.network "private_network", ip: "192.168.200.1",netmask: "24"
+    host.vm.network "private_network", ip: "192.168.200.1",netmask: "24"
+    # Disk
+    host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
     # provider
-    jenkins.vm.provider "virtualbox" do |vb|
+    host.vm.provider "virtualbox" do |vb|
       # 虚拟机名称
-      #vb.name = "DevOpsJenkins"
+      #vb.name = "xxx"
+      # 图形化
+      vb.gui = false
+      # 内存
+      vb.memory = "2048"
+      # cpu
+      vb.cpus = 2
+    end
+    # shell
+    host.vm.provision "shell", path: "script/vm_mysql.sh"
+    host.vm.provision "shell", path: "script/install_mysql_using_ded.sh"
+  end
+  
+  config.vm.define "jenkins" do |host|
+    # OnlyHost网卡
+    host.vm.network "private_network", ip: "192.168.200.2",netmask: "24"
+    # Disk
+    host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
+    # provider
+    host.vm.provider "virtualbox" do |vb|
+      # 虚拟机名称
+      #vb.name = "xxx"
+      # 图形化
+      vb.gui = false
+      # 内存
+      vb.memory = "2048"
+      # cpu
+      vb.cpus = 2
+    end
+    # shell
+    host.vm.provision "shell", path: "script/vm_jenkins.sh"
+  end
+  
+  config.vm.define "harbor" do |host|
+    # OnlyHost网卡
+    host.vm.network "private_network", ip: "192.168.200.3",netmask: "24"
+    # Disk
+    host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
+    host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false
+    # provider
+    host.vm.provider "virtualbox" do |vb|
+      # 虚拟机名称
+      #vb.name = "xxx"
+      # 图形化
+      vb.gui = false
+      # 内存
+      vb.memory = "2048"
+      # cpu
+      vb.cpus = 2
+    end
+    # shell
+    host.vm.provision "shell", path: "script/vm_harbor.sh"
+    host.vm.provision "shell", path: "script/lvm_extend.sh"
+  end
+  
+  config.vm.define "kuboardspray" do |host|
+    # OnlyHost网卡
+    host.vm.network "private_network", ip: "192.168.200.4",netmask: "24"
+    # Disk
+    host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
+    # provider
+    host.vm.provider "virtualbox" do |vb|
+      # 虚拟机名称
+      #vb.name = "xxx"
+      # 图形化
+      vb.gui = false
+      # 内存
+      vb.memory = "2048"
+      # cpu
+      vb.cpus = 2
+    end
+    # shell
+    host.vm.provision "shell", path: "script/vm_kuboardspray.sh"
+    host.vm.provision "shell", path: "script/install_docker.sh"
+    host.vm.provision "shell", path: "script/install_kuboardspray.sh"
+  end
+  
+  config.vm.define "kuboard" do |host|
+    # OnlyHost网卡
+    host.vm.network "private_network", ip: "192.168.200.5",netmask: "24"
+    # Disk
+    host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
+    # provider
+    host.vm.provider "virtualbox" do |vb|
+      # 虚拟机名称
+      #vb.name = "xxx"
       # 图形化
       vb.gui = false
       # 内存
@@ -39,31 +112,7 @@ Vagrant.configure("2") do |config|
       vb.cpus = 2
     end
     # shell
-    jenkins.vm.provision "shell", inline: <<-SHELL
-      sudo hostnamectl hostname jenkins.devops.vm.mimiknight.cn
-      sudo echo "Install Jenkins VM finished !!!"
-    SHELL
-  end
-  
-  config.vm.define "harbor" do |harbor|
-    # OnlyHost网卡
-    harbor.vm.network "private_network", ip: "192.168.200.2",netmask: "24"
-    # provider
-    harbor.vm.provider "virtualbox" do |vb|
-      # 虚拟机名称
-      #vb.name = "DevOpsHarbor"
-      # 图形化
-      vb.gui = false
-      # 内存
-      vb.memory = "8192"
-      # cpu
-      vb.cpus = 4
-    end
-    # shell
-    harbor.vm.provision "shell", inline: <<-SHELL
-      sudo hostnamectl hostname harbor.devops.vm.mimiknight.cn
-      sudo echo "Install Harbor VM finished !!!"
-    SHELL
+    host.vm.provision "shell", path: "script/vm_kuboardspray.sh"
   end
   
 end
