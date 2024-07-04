@@ -4,7 +4,7 @@
 # 显示指令及参数
 sudo set -ex
 #
-mkdir -p \
+sudo mkdir -p \
  /opt/workspace/data/kuboard-spray
 #
 docker pull swr.cn-east-2.myhuaweicloud.com/kuboard/kuboard-spray:v1.2.4-amd64
