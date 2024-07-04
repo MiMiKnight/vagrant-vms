@@ -33,6 +33,15 @@ sed -i '8s/^/# /g' /etc/fstab
 # 查看是否swap分区
 sudo swapon --show
 sudo free -h
+###############允许root用户SSH登陆###################
+sudo sed -i 's/#Port 22/Port 22/g' /etc/ssh/sshd_config
+sudo awk '/^Port 22/{print $0}' /etc/ssh/sshd_config
+sudo sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+sudo awk '/^PasswordAuthentication/{print $0}' /etc/ssh/sshd_config
+sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
+sudo awk '/^PermitRootLogin/{print $0}' /etc/ssh/sshd_config
+# 重启SSH
+sudo service sshd restart
 ####################################################
 # 输出提示
 sudo echo "Run public shell script finished !!!"
