@@ -1,7 +1,7 @@
 #!/bin/bash
 # 显示指令及参数
 sudo set -ex
-# 安装Docker
+#########################安装docker###########################
 # step 1: 安装必要的一些系统工具
 sudo apt-get update
 sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common
@@ -32,6 +32,7 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl restart docker
 sudo systemctl status docker
+####################安装docker-compose########################
 # 仅Python 3及以上版本支持docker-compose，并请确保已安装pip。
 sudo apt-get install -y python3-pip
 sudo pip3 -V
@@ -39,5 +40,6 @@ sudo pip3 -V
 sudo curl -L https://github.com/docker/compose/releases/download/v2.28.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 sudo docker-compose version
+##############################################################
 #
 sudo echo "Install docker success!!!"
