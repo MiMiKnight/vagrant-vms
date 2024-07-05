@@ -8,6 +8,7 @@ sudo mkdir -p \
 # 安装openssl
 sudo apt-get install -y openssl
 # 生成证书
+
 # 下载安装包
 sudo axel -n 8 -T 300 -k \
  -o /opt/backup/harbor-offline-installer-v2.10.3.tgz \
