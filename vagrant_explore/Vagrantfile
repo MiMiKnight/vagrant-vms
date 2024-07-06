@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
   
   config.vm.define "mysql" do |host|
     # OnlyHost网卡
-    host.vm.network "private_network", ip: "172.18.1.1",netmask: "16"
+    host.vm.network "private_network", ip: "10.102.1.1",netmask: "16"
     # Disk
     host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
     host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false
@@ -30,73 +30,6 @@ Vagrant.configure("2") do |config|
     # shell
     host.vm.provision "shell", path: "script/vm_mysql.sh"
     host.vm.provision "shell", path: "script/lvm_extend.sh"
-    host.vm.provision "shell", path: "script/install_mysql_using_ded.sh"
-  end
-  
-  config.vm.define "redis" do |host|
-    # OnlyHost网卡
-    host.vm.network "private_network", ip: "172.18.1.2",netmask: "16"
-    # Disk
-    host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
-    # provider
-    host.vm.provider "virtualbox" do |vb|
-      # 虚拟机名称
-      #vb.name = "xxx"
-      # 图形化
-      vb.gui = false
-      # 内存
-      vb.memory = "2048"
-      # cpu
-      vb.cpus = 2
-    end
-    # shell
-    host.vm.provision "shell", path: "script/vm_redis.sh"
-    host.vm.provision "shell", path: "script/install_redis.sh"
-  end
-  
-  config.vm.define "docker" do |host|
-    # OnlyHost网卡
-    host.vm.network "private_network", ip: "172.18.1.3",netmask: "16"
-    # Disk
-    host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
-    # provider
-    host.vm.provider "virtualbox" do |vb|
-      # 虚拟机名称
-      #vb.name = "xxx"
-      # 图形化
-      vb.gui = false
-      # 内存
-      vb.memory = "2048"
-      # cpu
-      vb.cpus = 2
-    end
-    # shell
-    host.vm.provision "shell", path: "script/vm_docker.sh"
-    host.vm.provision "shell", path: "script/install_docker.sh"
-  end
-  
-  config.vm.define "harbor" do |host|
-    # OnlyHost网卡
-    host.vm.network "private_network", ip: "172.18.1.4",netmask: "16"
-    # Disk
-    host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
-    host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false
-    # provider
-    host.vm.provider "virtualbox" do |vb|
-      # 虚拟机名称
-      #vb.name = "xxx"
-      # 图形化
-      vb.gui = false
-      # 内存
-      vb.memory = "8192"
-      # cpu
-      vb.cpus = 4
-    end
-    # shell
-    host.vm.provision "shell", path: "script/vm_harbor.sh"
-    host.vm.provision "shell", path: "script/lvm_extend.sh"
-    host.vm.provision "shell", path: "script/install_docker.sh"
-    host.vm.provision "shell", path: "script/install_harbor.sh"
   end
   
 end
