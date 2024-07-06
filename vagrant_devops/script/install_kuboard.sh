@@ -39,11 +39,6 @@ services:
     container_name: mariadb
     ports:
      - "3306:3306"
-    deploy:
-      resources:
-        limits:
-          cpus: '1'
-          memory: 512M
     environment:
       MARIADB_ROOT_PASSWORD: kuboardpwd
       MYSQL_ROOT_PASSWORD: kuboardpwd
@@ -58,37 +53,11 @@ services:
       kuboard_v4_dev:
         aliases:
           - db
-  kuboard-spray:
-    restart: unless-stopped
-    image: swr.cn-east-2.myhuaweicloud.com/kuboard/kuboard-spray:v1.2.4-amd64
-    container_name: kuboard-spray
-    privileged: true
-    ports:
-     - "8443:80"
-    deploy:
-      resources:
-        limits:
-          cpus: '1'
-          memory: 1024M
-    environment:
-      TZ: Asia/Shanghai
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /opt/workspace/data/kuboard-spray:/data
-    networks:
-      kuboard_v4_dev:
-        aliases:
-          - kuboard-spray
   kuboard:
     image: swr.cn-east-2.myhuaweicloud.com/kuboard/kuboard:v4
     container_name: kuboard
     ports:
       - '8444:80'
-    deploy:
-      resources:
-        limits:
-          cpus: '1'
-          memory: 1024M
     environment:
       - DB_DRIVER=org.mariadb.jdbc.Driver
       - DB_URL=jdbc:mariadb://db:3306/kuboard?serverTimezone=Asia/Shanghai
@@ -100,6 +69,22 @@ services:
       kuboard_v4_dev:
         aliases:
           - kuboard
+  kuboard-spray:
+    restart: unless-stopped
+    image: swr.cn-east-2.myhuaweicloud.com/kuboard/kuboard-spray:v1.2.4-amd64
+    container_name: kuboard-spray
+    privileged: true
+    ports:
+     - "8443:80"
+    environment:
+      TZ: Asia/Shanghai
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/workspace/data/kuboard-spray:/data
+    networks:
+      kuboard_v4_dev:
+        aliases:
+          - kuboard-spray
 EOF
 # 启动容器
 sudo docker-compose -f /opt/app/kuboard/kuboard-v4.yaml up -d
