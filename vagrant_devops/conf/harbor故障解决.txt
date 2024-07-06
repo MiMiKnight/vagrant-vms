@@ -1,0 +1,19 @@
+# harbor故障解决
+
+# 方式一
+# stop停止所有容器
+sudo docker stop $(docker ps -a -q)
+# remove删除所有容器
+sudo docker  rm $(docker ps -a -q) 
+# 删除所有镜像
+sudo docker rmi $(docker images -q)
+# 删除数据
+sudo rm -rf  /opt/app/harbor/data/*
+# 重新安装harbor
+cd /opt/app/harbor/harbor-2.11.0
+sudo ./install.sh
+
+# 默认密码
+admin/Harbor12345
+
+######################################
