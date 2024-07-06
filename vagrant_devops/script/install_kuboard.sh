@@ -5,7 +5,9 @@ set -ex
 # Kuboard-Spray 的默认用户名是 admin，默认密码是 Kuboard123
 # 访问链接：http://kuboardspray.devops.vm.mimiknight.cn/#/login
 #          https://kuboard.cn/v4/install/quickstart.html
-#
+# 切换用户
+sudo su - root
+# 创建数据目录
 sudo mkdir -p \
  /opt/app/kuboard \
  /opt/workspace/data/kuboard-spray \
@@ -89,7 +91,9 @@ services:
         aliases:
           - kuboard
 EOF
-#
+# 启动容器
 sudo docker-compose -f /opt/app/kuboard/kuboard-v4.yaml up -d
+# 切换用户
+sudo su - vagrant
 #
 sudo echo "Install Kuboard finished !!!"
