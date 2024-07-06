@@ -1,7 +1,6 @@
 #!/bin/bash
 # 显示指令及参数
-set -ex
-#
+sudo set -ex
 # 扩容大小
 capacity=$1
 [ ! $1 ] && capacity='+100G'
