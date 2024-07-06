@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
     # provider
     host.vm.provider "virtualbox" do |vb|
       # 虚拟机名称
-      #vb.name = "DevMySQL"
+      #vb.name = "xxx"
       # 图形化
       vb.gui = false
       # 内存
@@ -30,50 +30,6 @@ Vagrant.configure("2") do |config|
     end
     # shell
     host.vm.provision "shell", path: "script/vm_master01.sh"
-    host.vm.provision "shell", path: "script/lvm_extend.sh"
-  end
-  
-  config.vm.define "master02" do |host|
-    # OnlyHost网卡
-    host.vm.network "private_network", ip: "10.101.2.2",netmask: "16"
-    # Disk
-    host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
-    host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false
-    # provider
-    host.vm.provider "virtualbox" do |vb|
-      # 虚拟机名称
-      #vb.name = "DevMariaDB"
-      # 图形化
-      vb.gui = false
-      # 内存
-      vb.memory = "4096"
-      # cpu
-      vb.cpus = 4
-    end
-    # shell
-    host.vm.provision "shell", path: "script/vm_master02.sh"
-    host.vm.provision "shell", path: "script/lvm_extend.sh"
-  end
-  
-  config.vm.define "master03" do |host|
-    # OnlyHost网卡
-    host.vm.network "private_network", ip: "10.101.2.3",netmask: "16"
-    # Disk
-    host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
-    host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false
-    # provider
-    host.vm.provider "virtualbox" do |vb|
-      # 虚拟机名称
-      #vb.name = "DevRedis"
-      # 图形化
-      vb.gui = false
-      # 内存
-      vb.memory = "4096"
-      # cpu
-      vb.cpus = 4
-    end
-    # shell
-    host.vm.provision "shell", path: "script/vm_master03.sh"
     host.vm.provision "shell", path: "script/lvm_extend.sh"
   end
 
@@ -86,7 +42,7 @@ Vagrant.configure("2") do |config|
     # provider
     host.vm.provider "virtualbox" do |vb|
       # 虚拟机名称
-      #vb.name = "DevNacos"
+      #vb.name = "xxx"
       # 图形化
       vb.gui = false
       # 内存
@@ -108,7 +64,7 @@ Vagrant.configure("2") do |config|
     # provider
     host.vm.provider "virtualbox" do |vb|
       # 虚拟机名称
-      #vb.name = "DevNacos"
+      #vb.name = "xxx"
       # 图形化
       vb.gui = false
       # 内存
@@ -130,7 +86,7 @@ Vagrant.configure("2") do |config|
     # provider
     host.vm.provider "virtualbox" do |vb|
       # 虚拟机名称
-      #vb.name = "DevNacos"
+      #vb.name = "xxx"
       # 图形化
       vb.gui = false
       # 内存
@@ -140,6 +96,50 @@ Vagrant.configure("2") do |config|
     end
     # shell
     host.vm.provision "shell", path: "script/vm_worker03.sh"
+    host.vm.provision "shell", path: "script/lvm_extend.sh"
+  end
+  
+  config.vm.define "worker04" do |host|
+    # OnlyHost网卡
+    host.vm.network "private_network", ip: "10.101.2.7",netmask: "16"
+    # Disk
+    host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
+    host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false
+    # provider
+    host.vm.provider "virtualbox" do |vb|
+      # 虚拟机名称
+      #vb.name = "xxx"
+      # 图形化
+      vb.gui = false
+      # 内存
+      vb.memory = "12288"
+      # cpu
+      vb.cpus = 8
+    end
+    # shell
+    host.vm.provision "shell", path: "script/vm_worker04.sh"
+    host.vm.provision "shell", path: "script/lvm_extend.sh"
+  end
+  
+  config.vm.define "worker05" do |host|
+    # OnlyHost网卡
+    host.vm.network "private_network", ip: "10.101.2.8",netmask: "16"
+    # Disk
+    host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
+    host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false
+    # provider
+    host.vm.provider "virtualbox" do |vb|
+      # 虚拟机名称
+      #vb.name = "xxx"
+      # 图形化
+      vb.gui = false
+      # 内存
+      vb.memory = "12288"
+      # cpu
+      vb.cpus = 8
+    end
+    # shell
+    host.vm.provision "shell", path: "script/vm_worker05.sh"
     host.vm.provision "shell", path: "script/lvm_extend.sh"
   end
   
