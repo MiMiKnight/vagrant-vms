@@ -1,6 +1,6 @@
 #!/bin/bash
 # 显示指令及参数
-sudo set -ex
+set -ex
 #########################安装docker###########################
 # step 1: 安装必要的一些系统工具
 sudo apt-get update

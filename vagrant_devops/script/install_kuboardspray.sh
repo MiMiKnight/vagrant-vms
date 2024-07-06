@@ -1,9 +1,9 @@
 #!/bin/bash
+# 显示指令及参数
+set -ex
 # 安装教程 https://kuboard-spray.cn/
 # Kuboard-Spray 的默认用户名是 admin，默认密码是 Kuboard123
 # 访问链接：http://kuboardspray.devops.vm.mimiknight.cn/#/login
-# 显示指令及参数
-sudo set -ex
 #
 sudo mkdir -p \
  /opt/workspace/data/kuboard-spray
