@@ -9,7 +9,7 @@ set -ex
 # 安装系统基础软件
 sudo apt-get install -y \
   dialog vim iputils-ping lrzsz tcl expect \
-  ntpdate gdisk parted telnet axel
+  ntpdate gdisk parted telnet axel dos2unix
 # 设置NTP服务器
 sudo ntpdate ntp.vm.mimiknight.cn
 #sudo ntpdate ntp.aliyun.com
