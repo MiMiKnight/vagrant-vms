@@ -9,10 +9,14 @@ set -ex
 # 安装系统基础软件
 sudo apt-get install -y \
   dialog vim iputils-ping lrzsz tcl expect \
-  ntp ntpdate gdisk parted telnet axel
+  ntpdate gdisk parted telnet axel
 # 设置NTP服务器
-# sudo ntpdate ntp.vm.mimiknight.cn
+sudo ntpdate ntp.vm.mimiknight.cn
 #sudo ntpdate ntp.aliyun.com
+# 设置时区
+sudo timedatectl set-timezone Asia/Shanghai
+# 查看本地时间
+sudo date
 # 删除系统中不再需要的软件包及其依赖项
 sudo apt-get autoremove
 # 清理已经安装的软件包
