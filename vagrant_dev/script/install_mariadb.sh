@@ -1,8 +1,9 @@
 #!/bin/bash
+# 显示指令及参数
+set -ex
+#
 # 安装MySQL
 # 官方安装教程链接  https://dev.mysql.com/doc/mysql-secure-deployment-guide/8.0/en/secure-deployment-install.html
-# 显示指令及参数
-sudo set -ex
 # 切换root用户
 sudo su - root
 # 创建基本目录
