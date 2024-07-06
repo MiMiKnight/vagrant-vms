@@ -37,7 +37,10 @@ sudo systemctl status docker
 sudo apt-get install -y python3-pip
 sudo pip3 -V
 # 安装docker-compose v2.28.0
-sudo curl -L https://github.com/docker/compose/releases/download/v2.28.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+#sudo curl -L https://github.com/docker/compose/releases/download/v2.28.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+sudo axel -n 12 -T 300 -k \
+ -o /usr/local/bin/docker-compose \
+ https://github.com/docker/compose/releases/download/v2.28.0/docker-compose-`uname -s`-`uname -m`
 sudo chmod +x /usr/local/bin/docker-compose
 sudo docker-compose version
 ##############################################################
