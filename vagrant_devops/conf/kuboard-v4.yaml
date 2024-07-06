@@ -34,6 +34,11 @@ services:
       - source: create_db_sql
         target: /docker-entrypoint-initdb.d/create_db.sql
         mode: 0777
+    healthcheck:
+      test: ["CMD", "mysql -u kuboard -p", "ping"]
+      interval: 2s
+      timeout: 5s
+      retries: 10
     networks:
       kuboard_v4_dev:
         aliases:
@@ -54,7 +59,8 @@ services:
       - DB_USERNAME=kuboard
       - DB_PASSWORD=kuboardpwd
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     networks:
       kuboard_v4_dev:
         aliases:
