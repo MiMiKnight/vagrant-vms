@@ -86,9 +86,9 @@ Vagrant.configure("2") do |config|
       # 图形化
       vb.gui = false
       # 内存
-      vb.memory = "3072"
+      vb.memory = "2048"
       # cpu
-      vb.cpus = 3
+      vb.cpus = 2
     end
     # shell
     host.vm.provision "shell", path: "script/vm_kuboard.sh"
