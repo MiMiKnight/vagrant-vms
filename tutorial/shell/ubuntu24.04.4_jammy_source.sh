@@ -62,8 +62,8 @@ deb https://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe 
 deb-src https://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse
 EOF
 ###################################################
-# 删除华为源和阿里源 保留清华源
-sudo rm -rf /etc/apt/sources.list.d/{huawei,aliyun}.list
+# 删除清华源和阿里源 保留华为源
+sudo rm -rf /etc/apt/sources.list.d/{tsinghua,aliyun}.list
 # 刷新软件源仓库索引
 sudo apt-get update
 # 更新软件(不升级内核)
