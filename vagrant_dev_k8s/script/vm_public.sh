@@ -8,10 +8,10 @@ set -ex
 ######################基础设置#######################
 # 安装系统基础软件
 sudo apt-get install -y \
-  vim iputils-ping net-tools lrzsz gcc \
-  ntp ntpdate gdisk parted telnet tcl expect
+  dialog vim iputils-ping lrzsz tcl expect \
+  ntp ntpdate gdisk parted telnet
 # 设置NTP服务器
-sudo ntpdate ntp.vm.mimiknight.cn
+# sudo ntpdate ntp.vm.mimiknight.cn
 #sudo ntpdate ntp.aliyun.com
 # 删除系统中不再需要的软件包及其依赖项
 sudo apt-get autoremove
