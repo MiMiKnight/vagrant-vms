@@ -39,6 +39,11 @@ services:
     container_name: mariadb
     ports:
      - "3306:3306"
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
     environment:
       MARIADB_ROOT_PASSWORD: kuboardpwd
       MYSQL_ROOT_PASSWORD: kuboardpwd
@@ -63,7 +68,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.50'
+          cpus: '1'
           memory: 1024M
     environment:
       TZ: Asia/Shanghai
@@ -77,13 +82,18 @@ services:
   kuboard:
     image: swr.cn-east-2.myhuaweicloud.com/kuboard/kuboard:v4
     container_name: kuboard
+    ports:
+      - '8444:80'
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1024M
     environment:
       - DB_DRIVER=org.mariadb.jdbc.Driver
       - DB_URL=jdbc:mariadb://db:3306/kuboard?serverTimezone=Asia/Shanghai
       - DB_USERNAME=kuboard
       - DB_PASSWORD=kuboardpwd
-    ports:
-      - '8444:80'
     depends_on:
       - db
     networks:
