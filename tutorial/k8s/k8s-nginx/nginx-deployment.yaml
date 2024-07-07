@@ -19,6 +19,7 @@ spec:
       - image: harbor.devops.vm.mimiknight.cn/libray/nginx:1.27.0  # 镜像
         name: nginx  # 容器名称
         imagePullPolicy: IfNotPresent # 镜像pull策略
+        imagePullSecrets: harbor-registry
         ports:
         - containerPort: 80  # 容器对外暴露的端口号
         volumeMounts:  # 数据卷挂载
