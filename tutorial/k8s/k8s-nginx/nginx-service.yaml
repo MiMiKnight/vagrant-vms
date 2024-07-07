@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+   app: nginx
+  name: nginx-deployment
+  namespace: backend
+spec:
+  type: LoadBalancer # ClusterIP：集群内部使用(默认);NodePort：对外暴露应用； LoadBalancer：对外暴露应用，适用公有云
+  ports:
+  - name: nginx-service80
+    port: 9000  # service端口号（不同的service该值必须唯一）
+    protocol: TCP # 协议类型
+    targetPort: 80  # 容器端口号
+    #nodePort: 31090 # node端口号 （此模式下此配置非必填，可以随机生成）
+  selector:
+    app: nginx

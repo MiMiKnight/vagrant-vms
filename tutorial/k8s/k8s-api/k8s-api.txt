@@ -1,0 +1,7 @@
+# 获取k8s token
+
+## 
+kubectl create sa admin -n kube-system
+
+kubectl get secrets -n kube-system
+kubectl get secret -n kube-system bootstrap-token-3th4d8 -ojson
