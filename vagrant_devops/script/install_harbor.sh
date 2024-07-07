@@ -27,7 +27,7 @@ sudo mkdir -p \
 /opt/app/data/harbor \
 /etc/docker/certs.d/${app_domain}
 # 下载harbor
-sudo axel -n 12 -T 300 -k \
+sudo axel -n 12 -T 600 -k \
  -o /opt/backup/harbor-offline-installer-v2.11.0.tgz \
  https://github.com/goharbor/harbor/releases/download/v2.11.0/harbor-offline-installer-v2.11.0.tgz
 # 安装OpenSSL
@@ -37,7 +37,7 @@ sudo apt-get install -y openssl
 sudo openssl genrsa \
 -aes256 \
 -passout pass:${ca_cert_passwd} \
--out /opt/app/ca/${ca_domain}.pem 4096
+-out /opt/app/cert/ca/${ca_domain}.pem 4096
 # 生成CA CSR文件
 sudo openssl req -new \
  -subj "/C=CN/ST=JiangSu/L=NanJing/O=MiMiKnight/OU=MiMiKnight/CN=${ca_domain}" \
@@ -72,55 +72,65 @@ sudo openssl req -new \
 sudo openssl x509 -req -days 3650 \
  -in /opt/app/cert/harbor/${app_domain}.csr \
  -CA /opt/app/cert/ca/${ca_domain}.crt \
- -CAkey /opt/app/cert/harbor/${ca_domain}.pem \
+ -CAkey /opt/app/cert/ca/${ca_domain}.pem \
  -passin pass:${ca_cert_passwd} \
  -CAcreateserial \
  -out /opt/app/cert/harbor/${app_domain}.crt
 # 校验应用的crt证书是否由ca的crt签发(# OK表示校验通过)
-sudo openssl verify -CAfile \
- /opt/app/cert/ca/${app_domain}.crt \
+sudo openssl verify \
+ -CAfile /opt/app/cert/ca/${ca_domain}.crt \
  /opt/app/cert/harbor/${app_domain}.crt
 # 生成无密码的应用证书私钥（加密私钥生成无密私钥，pass：应用证书密码）
 sudo openssl rsa \
  -in /opt/app/cert/harbor/${app_domain}.pem \
  -passin pass:${app_cert_passwd} \
- -out /opt/app/cert/harbor/${app_domain}.nopass.pem
+ -out /opt/app/cert/harbor/${app_domain}.nopasswd.pem
 ###################配置harbor######################
 # 解压
 sudo tar -xvf /opt/backup/harbor-offline-installer-v2.11.0.tgz \
   --directory /opt/app
-# 解压位置：/opt/backup/harbor
+# 解压位置：/opt/app/harbor
 # 复制重命名harbor.yml.tmpl文件
 sudo cp /opt/app/harbor/harbor.yml.tmpl \
  /opt/app/harbor/harbor.yml
 # 修改域名
-sudo sed -i 's/hostname: reg.mydomain.com/hostname: ${app_domain}/g' /opt/app/harbor/harbor.yml
+sudo sed -i "s/hostname: reg.mydomain.com/hostname: ${app_domain}/g" /opt/app/harbor/harbor.yml
 sudo awk '/^hostname: /{print $0}' /opt/app/harbor/harbor.yml
 # 修改证书位置
-sudo sed -i 's#/your/certificate/path#/opt/app/cert/harbor/${app_domain}.crt#g' /opt/app/harbor/harbor.yml
+sudo sed -i "s#/your/certificate/path#/opt/app/cert/harbor/${app_domain}.crt#g" /opt/app/harbor/harbor.yml
 sudo awk '/^  certificate: /{print $0}' /opt/app/harbor/harbor.yml
 # 修改证书密钥位置
-sudo sed -i 's#/your/private/key/path#/opt/app/cert/harbor/${app_domain}.nopass.pem#g' /opt/app/harbor/harbor.yml
+sudo sed -i "s#/your/private/key/path#/opt/app/cert/harbor/${app_domain}.nopasswd.pem#g" /opt/app/harbor/harbor.yml
 sudo awk '/^  private_key: /{print $0}' /opt/app/harbor/harbor.yml
 # 修改数据位置
-sudo sed -i 's#data_volume: /data#data_volume: /opt/app/data/harbor#g' /opt/app/harbor/harbor.yml
+sudo sed -i "s#data_volume: /data#data_volume: /opt/app/data/harbor#g" /opt/app/harbor/harbor.yml
 sudo awk '/^data_volume: /{print $0}' /opt/app/harbor/harbor.yml
 ###################安装harbor######################
 # 编译/安装
-cd /opt/app/harbor
-#sudo ./prepare
-sudo ./install.sh
-cd ~
+sudo bash /opt/app/harbor/install.sh
 # 查看
 sudo docker images
 sudo docker ps -a
 sudo docker ps
 ####################客户端访问#####################
-# 客户端安装
-# /opt/app/ca/ca.mimiknight.cn.crt 
+# 客户端安装CA证书，例如:ca.mimiknight.cn.crt 
 # 访问
 # https://yourdomain
-##################################################
+####################docker访问#####################
+# 配置insecure-registries,生成docker daemon.json
+sudo cat > /opt/backup/daemon.json << EOF
+{
+    "registry-mirrors": [
+        "https://nj15n6e8.mirror.aliyuncs.com",
+        "https://dockerhub.icu"
+    ],
+    "insecure-registries": [
+        "https://${app_domain}"
+    ]
+}
+EOF
+# 到客户端dokcer容器配置上述daemon.json,使用docker login测试登录
+###################################################
 # 切换vagrant用户
 sudo su - vagrant
 #
