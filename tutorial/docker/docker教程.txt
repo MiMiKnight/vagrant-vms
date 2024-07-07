@@ -1,0 +1,47 @@
+# docker教程
+
+## 基本命令
+### 查看镜像
+docker images
+### 查看所有容器
+docker ps -a
+### 查看运行中的容器
+docker ps
+### 关闭所有容器
+docker stop $(docker ps -q)
+### 删除所有容器
+docker rm $(docker ps -aq)
+### 关闭并删除所有容器
+docker stop $(docker ps -q) & docker rm $(docker ps -aq)
+### 删除所有镜像
+docker rmi $(docker images -q)
+
+
+## 登录镜像仓库
+docker login 仓库域名 --username xxx --password xxx
+docker login harbor.devops.vm.mimiknight.cn --username admin --password Harbor12345
+
+
+## 登出镜像仓库
+docker logout 仓库域名
+docker logout harbor.devops.vm.mimiknight.cn
+
+
+## 从官方仓库拉取镜像
+docker pull alpine:3.20.1
+
+
+## 从指定仓库拉取镜像
+docker pull仓库域名/命名空间/镜像:[镜像版本号]
+docker pull harbor.devops.vm.mimiknight.cn/library/alpine:3.20.1
+
+
+## 本地镜像打标签
+docker tag [镜像id] 仓库域名/命名空间/镜像:[镜像版本号]
+docker tag alpine:3.20.1 harbor.devops.vm.mimiknight.cn/library/alpine:3.20.1
+
+
+## 推送本地镜像至指定仓库
+docker push 仓库域名/命名空间/镜像:[镜像版本号]
+docker push harbor.devops.vm.mimiknight.cn/library/alpine:3.20.1
+

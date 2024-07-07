@@ -26,10 +26,7 @@ sudo systemctl status docker
 sudo mkdir -p /etc/docker
 sudo tee /etc/docker/daemon.json <<-'EOF'
 {
-    "registry-mirrors": [
-        "https://harbor.devops.vm.mimiknight.cn",
-        "https://nj15n6e8.mirror.aliyuncs.com"
-    ]
+  "registry-mirrors": ["https://nj15n6e8.mirror.aliyuncs.com"]
 }
 EOF
 sudo systemctl daemon-reload

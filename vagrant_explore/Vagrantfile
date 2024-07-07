@@ -29,9 +29,7 @@ Vagrant.configure("2") do |config|
     end
     # shell
     host.vm.provision "shell", path: "script/vm_harbor.sh"
-    host.vm.provision "shell", path: "script/lvm_extend.sh"
     host.vm.provision "shell", path: "script/install_docker.sh"
-    #host.vm.provision "shell", path: "script/install_harbor.sh"
   end
   
 end
