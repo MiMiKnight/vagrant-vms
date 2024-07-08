@@ -107,7 +107,9 @@ sudo sed -i "s#data_volume: /data#data_volume: /opt/app/data/harbor#g" /opt/app/
 sudo awk '/^data_volume: /{print $0}' /opt/app/harbor/harbor.yml
 ###################安装harbor######################
 # 编译/安装
-sudo bash /opt/app/harbor/install.sh
+# sudo bash /opt/app/harbor/install.sh
+# 编译安装的同时开启helm仓库
+sudo bash /opt/app/harbor/install.sh --with-chartmuseum
 # 查看
 sudo docker images
 sudo docker ps -a
