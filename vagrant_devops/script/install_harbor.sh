@@ -119,6 +119,7 @@ sudo docker ps
 # 访问
 # https://yourdomain
 ####################docker访问#####################
+<< NOTES
 # 配置insecure-registries,生成docker daemon.json备份文件
 sudo cat > /opt/backup/daemon.json << EOF
 {
@@ -133,10 +134,11 @@ sudo cat > /opt/backup/daemon.json << EOF
 EOF
 # 到客户端dokcer容器应用上述daemon.json,使用docker login测试登录
 # /etc/docker/daemon.json
-# sudo systemctl daemon-reload
-# sudo systemctl restart docker
-# sudo systemctl status docker
-# docker login https://harbor.domain
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+sudo systemctl status docker
+docker login https://harbor.domain
+NOTES
 ###################################################
 # 切换vagrant用户
 sudo su - vagrant
