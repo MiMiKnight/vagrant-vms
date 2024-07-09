@@ -20,6 +20,7 @@ docker rmi $(docker images -q)
 ## 登录镜像仓库
 docker login 仓库域名 --username xxx --password xxx
 docker login harbor.devops.vm.mimiknight.cn --username admin --password Harbor12345
+docker login harbor.devops.vm.mimiknight.cn --username mmk --password HCWLv8Kw!8y%QSki
 
 
 ## 登出镜像仓库
