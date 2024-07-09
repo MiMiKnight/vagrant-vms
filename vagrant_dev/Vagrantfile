@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
   
   config.vm.define "mysql" do |host|
     # OnlyHost网卡
-    host.vm.network "private_network", ip: "10.101.1.1",netmask: "16"
+    host.vm.network "private_network", ip: "10.102.1.1",netmask: "16"
     # Disk
     host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
     host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false
@@ -36,7 +36,7 @@ Vagrant.configure("2") do |config|
   
   config.vm.define "mariadb" do |host|
     # OnlyHost网卡
-    host.vm.network "private_network", ip: "10.101.1.2",netmask: "16"
+    host.vm.network "private_network", ip: "10.102.1.2",netmask: "16"
     # Disk
     host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
     host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false
@@ -58,7 +58,7 @@ Vagrant.configure("2") do |config|
   
   config.vm.define "redis" do |host|
     # OnlyHost网卡
-    host.vm.network "private_network", ip: "10.101.1.3",netmask: "16"
+    host.vm.network "private_network", ip: "10.102.1.3",netmask: "16"
     # Disk
     host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
     # provider
@@ -79,7 +79,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "nacos" do |host|
     # OnlyHost网卡
-    host.vm.network "private_network", ip: "10.101.1.4",netmask: "16"
+    host.vm.network "private_network", ip: "10.102.1.4",netmask: "16"
     # Disk
     host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
     host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false

@@ -1,0 +1,6 @@
+
+# Vagrant配置VMware
+## 安装Vagrant VMware Utility
+https://developer.hashicorp.com/vagrant/docs/providers/vmware/vagrant-vmware-utility
+## 安装插件
+vagrant plugin install vagrant-vmware-desktop

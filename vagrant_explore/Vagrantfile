@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
   
   config.vm.define "harbor" do |host|
     # OnlyHost网卡
-    host.vm.network "private_network", ip: "10.102.1.1",netmask: "16"
+    host.vm.network "private_network", ip: "10.103.1.1",netmask: "16"
     # Disk
     host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
     # provider
