@@ -65,7 +65,7 @@ EOF
 # 删除华为源和阿里源 保留清华源
 sudo rm -rf /etc/apt/sources.list.d/{huawei,aliyun}.list
 # 刷新软件源仓库索引
-sudo apt-get update
+# sudo apt-get update
 # 更新软件(不升级内核)
 sudo apt-get -y upgrade
 # 更新软件(会升级内核，须谨慎)
