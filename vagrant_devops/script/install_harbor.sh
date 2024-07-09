@@ -4,6 +4,7 @@ set -ex
 ##################################################
 # 安装harbor（前提：安装docker以及docker-compose）
 # 安装harbor前置条件 https://goharbor.io/docs/2.9.0/install-config/installation-prereqs/
+# 默认web密码：Harbor12345
 ##################################################
 # 切换root用户
 sudo su - root
