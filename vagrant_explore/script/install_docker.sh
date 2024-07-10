@@ -24,11 +24,14 @@ sudo docker version
 sudo systemctl status docker
 # 配置docker加速镜像地址
 sudo mkdir -p /etc/docker
-sudo tee /etc/docker/daemon.json <<-'EOF'
+sudo cat /etc/docker/daemon.json <<-'EOF'
 {
     "registry-mirrors": [
-        "https://harbor.devops.vm.mimiknight.cn",
-        "https://nj15n6e8.mirror.aliyuncs.com"
+        "https://nj15n6e8.mirror.aliyuncs.com",
+        "https://dockerhub.icu"
+    ],
+    "insecure-registries": [
+        "https://harbor.devops.vm.mimiknight.cn"
     ]
 }
 EOF
