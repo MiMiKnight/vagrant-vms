@@ -24,7 +24,7 @@ sudo docker version
 sudo systemctl status docker
 # 配置docker加速镜像地址
 sudo mkdir -p /etc/docker
-sudo cat /etc/docker/daemon.json <<-'EOF'
+sudo tee /etc/docker/daemon.json <<-'EOF'
 {
     "registry-mirrors": [
         "https://nj15n6e8.mirror.aliyuncs.com",
