@@ -3,7 +3,7 @@
 set -ex
 #########################安装docker###########################
 # step 1: 安装必要的一些系统工具
-#sudo apt-get update
+sudo apt-get update
 sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common
 # step 2: 安装GPG证书
 curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
