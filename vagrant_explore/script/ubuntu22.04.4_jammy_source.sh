@@ -54,7 +54,7 @@ deb-src https://mirrors.aliyun.com/ubuntu/ jammy-security main restricted univer
 
 deb https://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse
 deb-src https://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse
-jammy-updates
+
 deb https://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse
 deb-src https://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse
 
@@ -75,6 +75,6 @@ sudo rm -rf /etc/apt/sources.list.d/{huawei,aliyun}.list
 # 刷新软件源仓库索引
 sudo apt-get update
 # 更新软件
-# sudo apt-get -y upgrade
+sudo apt-get -y upgrade
 # 更新软件
 sudo apt-get -y dist-upgrade
