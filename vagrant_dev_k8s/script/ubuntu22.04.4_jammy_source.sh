@@ -61,12 +61,21 @@ deb-src https://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted univer
 deb https://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse
 deb-src https://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse
 EOF
+#############关闭upgrade自动升级内核#################
+# 查看当前内核版本
+sudo uname -r
+# 查看目前存在的内核以及状态
+# sudo dpkg --get-selections | grep -E ^linux-*
+sudo dpkg --get-selections | grep -E "(^linux-image)|(^linux-headers)|(^linux-modules)"
+# 禁止upgrade自动更新内核
+sudo apt-mark hold `sudo dpkg --get-selections | grep -E "(^linux-image)|(^linux-headers)|(^linux-modules)" | awk '{print $1}'`
+###################################################
 ###################################################
 # 删除华为源和阿里源 保留清华源
 sudo rm -rf /etc/apt/sources.list.d/{huawei,aliyun}.list
 # 刷新软件源仓库索引
 sudo apt-get update
-# 更新软件(不升级内核)
-sudo apt-get -y upgrade
-# 更新软件(会升级内核，须谨慎)
-# sudo apt-get -y dist-upgrade
+# 更新软件
+# sudo apt-get -y upgrade
+# 更新软件
+sudo apt-get -y dist-upgrade
