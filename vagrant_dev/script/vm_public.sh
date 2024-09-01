@@ -5,7 +5,7 @@ set -ex
 # 公共脚本
 ##################################################
 ####################Ubuntu设置DNS####################
-DNS='10.101.0.254'
+DNS='10.101.0.254 223.5.5.5 223.6.6.6'
 sudo cp /etc/systemd/resolved.conf /etc/systemd/resolved.conf.bak
 sudo sed -i "s/#DNS=/DNS=${DNS}/g" /etc/systemd/resolved.conf
 sudo awk '/^DNS=/{print $0}' /etc/systemd/resolved.conf

@@ -23,8 +23,8 @@ chmod -R 750 /opt/app/mariadb /opt/workspace/mariadb
 ldd --version
 # 下载MySQL二进制安装包
 sudo wget --timeout=600 --tries=2 \
- -O /opt/backup/mariadb-11.4.2-linux-systemd-x86_64.tar.gz \
- https://mirrors.aliyun.com/mariadb//mariadb-11.4.2/bintar-linux-systemd-x86_64/mariadb-11.4.2-linux-systemd-x86_64.tar.gz
+ -O /opt/backup/mariadb-11.4.3-linux-systemd-x86_64.tar.gz \
+ https://mirrors.aliyun.com/mariadb/mariadb-11.4.3/bintar-linux-systemd-x86_64/mariadb-11.4.3-linux-systemd-x86_64.tar.gz
  # 安装 libaio library
 sudo apt-cache search libaio
 sudo apt-get install -y libaio-dev
@@ -32,14 +32,14 @@ sudo apt-get install -y libaio1t64
 sudo apt-get install -y libncurses*
 sudo apt-get install -y libncurses5
 # 解压安装 mysql tar.xz 压缩包
-sudo tar xf /opt/backup/mariadb-11.4.2-linux-systemd-x86_64.tar.gz \
+sudo tar xf /opt/backup/mariadb-11.4.3-linux-systemd-x86_64.tar.gz \
   --directory /opt/app/mariadb
 
 # 修改目录用户属性
 chown -R mysql:mysql /opt/app/mariadb
 chown -R mysql:mysql /opt/workspace/mariadb
 # 建立软链接
-sudo ln -s /opt/app/mariadb/mariadb-11.4.2-linux-systemd-x86_64 /usr/local/mysql
+sudo ln -s /opt/app/mariadb/mariadb-11.4.3-linux-systemd-x86_64 /usr/local/mysql
 sudo chown -R mysql:mysql /usr/local/mysql
 sudo ln -s /opt/workspace/mariadb/data /usr/local/mysql/data
 sudo chown -R mysql:mysql /usr/local/mysql/data
