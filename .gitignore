@@ -1,4 +1,7 @@
 【backup】
 .vagrant
-vagrant_dev/conf
 vagrant_dev/soft
+
+share
+!share/share.sh
+!share/readme.txt

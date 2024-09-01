@@ -60,7 +60,7 @@ Vagrant.configure("2") do |config|
     # shell
     host.vm.provision "shell", path: "script/vm_mariadb.sh"
     host.vm.provision "shell", path: "script/lvm_extend.sh"
-    host.vm.provision "shell", path: "script/install_mariadb.sh"
+    #host.vm.provision "shell", path: "script/install_mariadb.sh"
   end
   
   # redis.dev.vm.mimiknight.cn
