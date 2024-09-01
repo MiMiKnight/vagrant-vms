@@ -11,6 +11,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "script/ubuntu22.04.4_jammy_source.sh"
   config.vm.provision "shell", path: "script/vm_public.sh"
   
+  # mysql.dev.vm.mimiknight.cn
   config.vm.define "mysql" do |host|
     # OnlyHost网卡
     host.vm.network "private_network", ip: "10.102.1.1",netmask: "16"
@@ -34,6 +35,7 @@ Vagrant.configure("2") do |config|
     host.vm.provision "shell", path: "script/install_mysql_using_ded.sh"
   end
   
+  # mariadb.dev.vm.mimiknight.cn
   config.vm.define "mariadb" do |host|
     # OnlyHost网卡
     host.vm.network "private_network", ip: "10.102.1.2",netmask: "16"
@@ -56,6 +58,7 @@ Vagrant.configure("2") do |config|
     host.vm.provision "shell", path: "script/lvm_extend.sh"
   end
   
+  # redis.dev.vm.mimiknight.cn
   config.vm.define "redis" do |host|
     # OnlyHost网卡
     host.vm.network "private_network", ip: "10.102.1.3",netmask: "16"
@@ -77,6 +80,7 @@ Vagrant.configure("2") do |config|
     host.vm.provision "shell", path: "script/install_redis.sh"
   end
 
+  # nacos.dev.vm.mimiknight.cn
   config.vm.define "nacos" do |host|
     # OnlyHost网卡
     host.vm.network "private_network", ip: "10.102.1.4",netmask: "16"

@@ -11,6 +11,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "script/ubuntu22.04.4_jammy_source.sh"
   config.vm.provision "shell", path: "script/vm_public.sh"
   
+  # master01.k8s.dev.vm.mimiknight.cn
   config.vm.define "master01" do |host|
     # OnlyHost网卡
     host.vm.network "private_network", ip: "10.102.2.1",netmask: "16"
@@ -33,6 +34,7 @@ Vagrant.configure("2") do |config|
     host.vm.provision "shell", path: "script/lvm_extend.sh"
   end
 
+  # worker01.k8s.dev.vm.mimiknight.cn
   config.vm.define "worker01" do |host|
     # OnlyHost网卡
     host.vm.network "private_network", ip: "10.102.2.4",netmask: "16"
@@ -55,6 +57,7 @@ Vagrant.configure("2") do |config|
     host.vm.provision "shell", path: "script/lvm_extend.sh"
   end
 
+  # worker02.k8s.dev.vm.mimiknight.cn
   config.vm.define "worker02" do |host|
     # OnlyHost网卡
     host.vm.network "private_network", ip: "10.102.2.5",netmask: "16"
@@ -77,6 +80,7 @@ Vagrant.configure("2") do |config|
     host.vm.provision "shell", path: "script/lvm_extend.sh"
   end
 
+  # worker03.k8s.dev.vm.mimiknight.cn
   config.vm.define "worker03" do |host|
     # OnlyHost网卡
     host.vm.network "private_network", ip: "10.102.2.6",netmask: "16"
@@ -98,7 +102,8 @@ Vagrant.configure("2") do |config|
     host.vm.provision "shell", path: "script/vm_worker03.sh"
     host.vm.provision "shell", path: "script/lvm_extend.sh"
   end
-  
+
+  # worker04.k8s.dev.vm.mimiknight.cn
   config.vm.define "worker04" do |host|
     # OnlyHost网卡
     host.vm.network "private_network", ip: "10.102.2.7",netmask: "16"
@@ -120,7 +125,8 @@ Vagrant.configure("2") do |config|
     host.vm.provision "shell", path: "script/vm_worker04.sh"
     host.vm.provision "shell", path: "script/lvm_extend.sh"
   end
-  
+
+  # worker05.k8s.dev.vm.mimiknight.cn
   config.vm.define "worker05" do |host|
     # OnlyHost网卡
     host.vm.network "private_network", ip: "10.102.2.8",netmask: "16"

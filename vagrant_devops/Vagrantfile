@@ -10,7 +10,8 @@ Vagrant.configure("2") do |config|
   # 公共Shell
   config.vm.provision "shell", path: "script/ubuntu22.04.4_jammy_source.sh"
   config.vm.provision "shell", path: "script/vm_public.sh"
-  
+
+  # mysql.devops.vm.mimiknight.cn
   config.vm.define "mysql" do |host|
     # OnlyHost网卡
     host.vm.network "private_network", ip: "10.101.1.1",netmask: "16"
@@ -31,7 +32,8 @@ Vagrant.configure("2") do |config|
     host.vm.provision "shell", path: "script/vm_mysql.sh"
     host.vm.provision "shell", path: "script/install_mysql_using_ded.sh"
   end
-  
+
+  # jenkins.devops.vm.mimiknight.cn
   config.vm.define "jenkins" do |host|
     # OnlyHost网卡
     host.vm.network "private_network", ip: "10.101.1.2",netmask: "16"
@@ -51,7 +53,8 @@ Vagrant.configure("2") do |config|
     # shell
     host.vm.provision "shell", path: "script/vm_jenkins.sh"
   end
-  
+
+  # harbor.devops.vm.mimiknight.cn
   config.vm.define "harbor" do |host|
     # OnlyHost网卡
     host.vm.network "private_network", ip: "10.101.1.3",netmask: "16"
@@ -75,7 +78,8 @@ Vagrant.configure("2") do |config|
     host.vm.provision "shell", path: "script/install_docker.sh"
     host.vm.provision "shell", path: "script/install_harbor.sh"
   end
-  
+
+  # kuboard.devops.vm.mimiknight.cn
   config.vm.define "kuboard" do |host|
     # OnlyHost网卡
     host.vm.network "private_network", ip: "10.101.1.4",netmask: "16"
