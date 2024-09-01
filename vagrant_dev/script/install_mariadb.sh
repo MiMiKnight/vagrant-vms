@@ -6,6 +6,11 @@ set -ex
 # 官方安装教程链接  https://dev.mysql.com/doc/mysql-secure-deployment-guide/8.0/en/secure-deployment-install.html
 # 切换root用户
 sudo su - root
+# 变量
+mariadb_tar_url='https://mirrors.neusoft.edu.cn/mariadb//mariadb-11.4.3/bintar-linux-systemd-x86_64/mariadb-11.4.3-linux-systemd-x86_64.tar.gz'
+mariadb_tar_name='mariadb-11.4.3-linux-systemd-x86_64.tar.gz'
+mariadb_version='mariadb-11.4.3'
+root_password='123456'
 # 创建基本目录
 sudo mkdir -p \
  /opt/backup \
@@ -22,9 +27,8 @@ chmod -R 750 /opt/app/mariadb /opt/workspace/mariadb
 ### 查看GLIBC版本
 ldd --version
 # 下载MySQL二进制安装包
-sudo wget --timeout=600 --tries=2 \
- -O /opt/backup/mariadb-11.4.3-linux-systemd-x86_64.tar.gz \
- https://mirrors.aliyun.com/mariadb/mariadb-11.4.3/bintar-linux-systemd-x86_64/mariadb-11.4.3-linux-systemd-x86_64.tar.gz
+sudo axel -n 12 -T 600 -k \
+ -o /opt/backup/${mariadb_tar_name} ${mariadb_tar_url}
  # 安装 libaio library
 sudo apt-cache search libaio
 sudo apt-get install -y libaio-dev
@@ -32,14 +36,15 @@ sudo apt-get install -y libaio1t64
 sudo apt-get install -y libncurses*
 sudo apt-get install -y libncurses5
 # 解压安装 mysql tar.xz 压缩包
-sudo tar xf /opt/backup/mariadb-11.4.3-linux-systemd-x86_64.tar.gz \
+sudo tar xf /opt/backup/${mariadb_tar_name} \
   --directory /opt/app/mariadb
+sudo mv /opt/app/mariadb/mariadb-11.4.3-linux-systemd-x86_64 /opt/app/mariadb/${mariadb_version}
 
 # 修改目录用户属性
 chown -R mysql:mysql /opt/app/mariadb
 chown -R mysql:mysql /opt/workspace/mariadb
 # 建立软链接
-sudo ln -s /opt/app/mariadb/mariadb-11.4.3-linux-systemd-x86_64 /usr/local/mysql
+sudo ln -s /opt/app/mariadb/${mariadb_version} /usr/local/mysql
 sudo chown -R mysql:mysql /usr/local/mysql
 sudo ln -s /opt/workspace/mariadb/data /usr/local/mysql/data
 sudo chown -R mysql:mysql /usr/local/mysql/data
@@ -198,9 +203,9 @@ expect "Enter password:" { send "\r" }
 expect "mysql>" { send "show databases;\r" }
 expect "mysql>" { send "use mysql;\r" }
 expect "mysql>" { send "show tables;\r" }
-expect "mysql>" { send "alter user 'root'@'localhost' identified by '123456';\r" }
+expect "mysql>" { send "alter user 'root'@'localhost' identified by '${root_password}';\r" }
 expect "mysql>" { send "select host,user from user;\r" }
-expect "mysql>" { send "grant all privileges on *.* to root@'%' identified by '123456' with grant option;\r" }
+expect "mysql>" { send "grant all privileges on *.* to root@'%' identified by '${root_password}' with grant option;\r" }
 expect "mysql>" { send "flush privileges;\r" }
 expect "mysql>" { send "quit;\r" }
 expect eof
@@ -210,7 +215,6 @@ sudo systemctl restart mysqld
 # 查看MySQL状态
 sudo systemctl status mysqld
 # 清理
-sudo rm -rf /opt/backup/mysql-8.0.37
 sudo apt-get autoclean
 # 切换vagrant用户
 sudo su - vagrant
