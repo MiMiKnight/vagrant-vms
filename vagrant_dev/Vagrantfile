@@ -45,7 +45,7 @@ Vagrant.configure("2") do |config|
     host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
     host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false
     # share
-    host.vm.synced_folder "share/", "/opt/share", type: "nfs"
+    host.vm.synced_folder "share/", "/opt/share"
     # provider
     host.vm.provider "virtualbox" do |vb|
       # 虚拟机名称
@@ -70,7 +70,7 @@ Vagrant.configure("2") do |config|
     # Disk
     host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
     # share
-    host.vm.synced_folder "share/", "/opt/share", type: "nfs"
+    host.vm.synced_folder "share/", "/opt/share"
     # provider
     host.vm.provider "virtualbox" do |vb|
       # 虚拟机名称
@@ -95,7 +95,7 @@ Vagrant.configure("2") do |config|
     host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
     host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false
     # share
-    host.vm.synced_folder "share/", "/opt/share", type: "nfs"
+    host.vm.synced_folder "share/", "/opt/share"
     # provider
     host.vm.provider "virtualbox" do |vb|
       # 虚拟机名称
