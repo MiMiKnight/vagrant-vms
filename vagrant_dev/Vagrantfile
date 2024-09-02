@@ -10,6 +10,10 @@ Vagrant.configure("2") do |config|
   # 公共Shell
   config.vm.provision "shell", path: "script/ubuntu_source.sh"
   config.vm.provision "shell", path: "script/vm_public.sh"
+  # 关闭默认共享文件夹
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+  # 新增share共享文件夹
+  config.vm.synced_folder "share/", "/opt/share", owner: "vagrant", group: "vagrant"
   
   # mysql.dev.vm.mimiknight.cn
   config.vm.define "mysql" do |host|
@@ -18,8 +22,6 @@ Vagrant.configure("2") do |config|
     # Disk
     host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
     host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false
-    # share
-    host.vm.synced_folder "share/", "/opt/share", type: "nfs"
     # provider
     host.vm.provider "virtualbox" do |vb|
       # 虚拟机名称
@@ -44,8 +46,6 @@ Vagrant.configure("2") do |config|
     # Disk
     host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
     host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false
-    # share
-    host.vm.synced_folder "share/", "/opt/share"
     # provider
     host.vm.provider "virtualbox" do |vb|
       # 虚拟机名称
@@ -69,8 +69,6 @@ Vagrant.configure("2") do |config|
     host.vm.network "private_network", ip: "10.102.1.3",netmask: "16"
     # Disk
     host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
-    # share
-    host.vm.synced_folder "share/", "/opt/share"
     # provider
     host.vm.provider "virtualbox" do |vb|
       # 虚拟机名称
@@ -94,8 +92,6 @@ Vagrant.configure("2") do |config|
     # Disk
     host.vm.disk :disk, size: "65GB", name: "box-disk001", primary: true
     host.vm.disk :disk, size: "500GB", name: "box-disk002", primary: false
-    # share
-    host.vm.synced_folder "share/", "/opt/share"
     # provider
     host.vm.provider "virtualbox" do |vb|
       # 虚拟机名称

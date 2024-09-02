@@ -29,7 +29,7 @@ sudo timedatectl set-timezone Asia/Shanghai
 # 查看本地时间
 sudo date
 # 删除系统中不再需要的软件包及其依赖项
-sudo apt-get autoremove
+#sudo apt-get autoremove
 # 清理已经安装的软件包
 sudo apt-get autoclean
 }
