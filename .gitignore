@@ -1,8 +1,6 @@
 【backup】
-.vagrant/
-soft/
-share/
-!vagrant_dev/share/share.sh
-!vagrant_dev/share/readme.txt
-!vagrant_devops/share/share.sh
-!vagrant_devops/share/readme.txt
+/vagrant_*/.vagrant
+/vagrant_*/soft
+/vagrant_*/share
+!/vagrant_*/share/share.sh
+!/vagrant_*/share/readme.txt
