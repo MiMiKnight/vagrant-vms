@@ -27,9 +27,13 @@ chmod -R 750 /opt/app/mariadb /opt/workspace/mariadb
 ### 查看GLIBC版本
 ldd --version
 # 下载MySQL二进制安装包
+function download(){
 sudo axel -n 12 -T 600 -k \
  -o /opt/backup/${mariadb_tar_name} ${mariadb_tar_url}
- # 安装 libaio library
+}
+download
+#sudp cp /opt/share/${mariadb_tar_name} /opt/backup/${mariadb_tar_name} 
+# 安装 libaio library
 sudo apt-cache search libaio
 sudo apt-get install -y libaio-dev
 sudo apt-get install -y libaio1t64
