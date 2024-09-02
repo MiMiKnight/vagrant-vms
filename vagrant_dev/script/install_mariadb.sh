@@ -21,7 +21,7 @@ sudo mkdir -p \
 sudo groupadd -g 500 -o -r mysql
 sudo useradd -M -N -g mysql -o -r -d /home/mysql -s /usr/sbin/nologin -c "MySQL Server" -u 500 mysql
 # 查看是否新增用户成功
-awk '/mysql/{print $0}' /etc/passwd
+sudo awk '/mysql/{print $0}' /etc/passwd
 # 修改目录用户属性
 sudo chown -R mysql:mysql /opt/app/mariadb /opt/workspace/mariadb
 sudo chmod -R 750 /opt/app/mariadb /opt/workspace/mariadb
@@ -203,16 +203,17 @@ sudo systemctl status mariadb
 #
 sudo /usr/bin/expect << EOF
 set timeout 60
+set password ${root_password}
 spawn /usr/local/mysql/bin/mariadb -u root -p
 expect "Enter password:" { send "\r" }
-expect "mysql>" { send "show databases;\r" }
-expect "mysql>" { send "use mysql;\r" }
-expect "mysql>" { send "show tables;\r" }
-expect "mysql>" { send "alter user 'root'@'localhost' identified by '${root_password}';\r" }
-expect "mysql>" { send "select host,user from user;\r" }
-expect "mysql>" { send "grant all privileges on *.* to root@'%' identified by '${root_password}' with grant option;\r" }
-expect "mysql>" { send "flush privileges;\r" }
-expect "mysql>" { send "quit;\r" }
+expect "MariaDB [(none)]>" { send "show databases;\r" }
+expect "MariaDB [(none)]>" { send "use mysql;\r" }
+expect "MariaDB [mysql]>" { send "show tables;\r" }
+expect "MariaDB [mysql]>" { send "alter user 'root'@'localhost' identified by '$password';\r" }
+expect "MariaDB [mysql]>" { send "select host,user from user;\r" }
+expect "MariaDB [mysql]>" { send "grant all privileges on *.* to root@'%' identified by '$password' with grant option;\r" }
+expect "MariaDB [mysql]>" { send "flush privileges;\r" }
+expect "MariaDB [mysql]>" { send "quit;\r" }
 expect eof
 EOF
 # 重启MySQL
