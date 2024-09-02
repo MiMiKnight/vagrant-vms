@@ -203,17 +203,16 @@ sudo systemctl status mariadb
 #
 sudo /usr/bin/expect << EOF
 set timeout 60
-set password ${root_password}
 spawn /usr/local/mysql/bin/mariadb -u root -p
 expect "Enter password:" { send "\r" }
-expect "MariaDB [(none)]>" { send "show databases;\r" }
-expect "MariaDB [(none)]>" { send "use mysql;\r" }
-expect "MariaDB [mysql]>" { send "show tables;\r" }
-expect "MariaDB [mysql]>" { send "alter user 'root'@'localhost' identified by '$password';\r" }
-expect "MariaDB [mysql]>" { send "select host,user from user;\r" }
-expect "MariaDB [mysql]>" { send "grant all privileges on *.* to root@'%' identified by '$password' with grant option;\r" }
-expect "MariaDB [mysql]>" { send "flush privileges;\r" }
-expect "MariaDB [mysql]>" { send "quit;\r" }
+expect "MariaDB" { send "show databases;\r" }
+expect "MariaDB" { send "use mysql;\r" }
+expect "MariaDB" { send "show tables;\r" }
+expect "MariaDB" { send "alter user 'root'@'localhost' identified by '123456';\r" }
+expect "MariaDB" { send "select host,user from user;\r" }
+expect "MariaDB" { send "grant all privileges on *.* to root@'%' identified by '123456' with grant option;\r" }
+expect "MariaDB" { send "flush privileges;\r" }
+expect "MariaDB" { send "quit;\r" }
 expect eof
 EOF
 # 重启MySQL
