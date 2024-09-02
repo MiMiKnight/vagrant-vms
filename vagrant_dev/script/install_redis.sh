@@ -3,6 +3,8 @@
 set -ex
 # 官网教程链接 https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/install-redis-on-linux/
 # 安装Redis
+# 变量
+redis_password=123456
 #
 sudo apt install lsb-release curl gpg
 sudo curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
@@ -21,11 +23,11 @@ sudo redis-server --version
 # 查看是否新增用户成功
 awk '/redis/{print $0}' /etc/passwd
 # 配置文件位置 /etc/redis/redis.conf
-# 修改密码（密码：123456）
-sed -i 's/# requirepass foobared/requirepass 123456/g' /etc/redis/redis.conf
+# 修改密码
+sed -i "s/# requirepass foobared/requirepass ${redis_password}/g" /etc/redis/redis.conf
 awk '/^requirepass /{print $0}' /etc/redis/redis.conf
 # 修改ip
-sed -i 's/bind 127.0.0.1 -::1/bind 0.0.0.0/g' /etc/redis/redis.conf
+sed -i "s/bind 127.0.0.1 -::1/bind 0.0.0.0/g" /etc/redis/redis.conf
 awk '/^bind 0.0.0.0/{print $0}' /etc/redis/redis.conf
 # 自启动配置文件 /usr/lib/systemd/system/redis-server.service
 # 重载配置文件

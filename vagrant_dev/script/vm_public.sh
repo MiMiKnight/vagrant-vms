@@ -15,7 +15,7 @@ sudo systemctl enable systemd-resolved
 # 安装系统基础软件
 sudo apt-get install -y \
   dialog vim iputils-ping lrzsz tcl expect \
-  ntpdate gdisk parted telnet axel dos2unix
+  ntpdate gdisk parted telnet axel dos2unix apt-utils
 # 设置NTP服务器
 sudo ntpdate ntp.vm.mimiknight.cn
 #sudo ntpdate ntp.aliyun.com
@@ -24,7 +24,7 @@ sudo timedatectl set-timezone Asia/Shanghai
 # 查看本地时间
 sudo date
 # 删除系统中不再需要的软件包及其依赖项
-#sudo apt-get autoremove
+sudo apt-get autoremove
 # 清理已经安装的软件包
 sudo apt-get autoclean
 ######################禁用swap#######################
