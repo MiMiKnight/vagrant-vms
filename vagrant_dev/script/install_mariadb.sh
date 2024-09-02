@@ -2,13 +2,14 @@
 # 显示指令及参数
 set -ex
 #
-# 安装MySQL
-# 官方安装教程链接  https://dev.mysql.com/doc/mysql-secure-deployment-guide/8.0/en/secure-deployment-install.html
+# 安装MariaDB
+# 官方安装教程链接 https://mariadb.org/wp-content/uploads/2024/08/MariaDBServerKnowledgeBase.pdf
 # 切换root用户
 sudo su - root
 # 变量
 mariadb_tar_url='https://mirrors.neusoft.edu.cn/mariadb//mariadb-11.4.3/bintar-linux-systemd-x86_64/mariadb-11.4.3-linux-systemd-x86_64.tar.gz'
 mariadb_tar_name='mariadb-11.4.3-linux-systemd-x86_64.tar.gz'
+mariadb_install_dir_name='mariadb-11.4.3-linux-systemd-x86_64'
 mariadb_version='mariadb-11.4.3'
 root_password='123456'
 # 创建基本目录
@@ -32,17 +33,17 @@ sudo axel -n 12 -T 600 -k \
  -o /opt/backup/${mariadb_tar_name} ${mariadb_tar_url}
 }
 download
-#sudp cp /opt/share/${mariadb_tar_name} /opt/backup/${mariadb_tar_name} 
+#sudo cp /opt/share/${mariadb_tar_name} /opt/backup/${mariadb_tar_name}
 # 安装 libaio library
 sudo apt-cache search libaio
 sudo apt-get install -y libaio-dev
-sudo apt-get install -y libaio1t64
+#sudo apt-get install -y libaio1t64
 sudo apt-get install -y libncurses*
 sudo apt-get install -y libncurses5
 # 解压安装 mysql tar.xz 压缩包
 sudo tar xf /opt/backup/${mariadb_tar_name} \
   --directory /opt/app/mariadb
-sudo mv /opt/app/mariadb/mariadb-11.4.3-linux-systemd-x86_64 /opt/app/mariadb/${mariadb_version}
+sudo mv /opt/app/mariadb/${mariadb_install_dir_name} /opt/app/mariadb/${mariadb_version}
 
 # 修改目录用户属性
 chown -R mysql:mysql /opt/app/mariadb
@@ -143,7 +144,7 @@ sudo /usr/local/mysql/bin/mysqld \
  --user=mysql \
  --basedir=/usr/local/mysql \
  --datadir=/usr/local/mysql/data \
- --initialize-insecure
+ --initialize
 # 修改目录或者文件权限
 chown -R mysql:mysql /opt/app/mariadb
 chown -R mysql:mysql /opt/workspace/mariadb
@@ -200,6 +201,7 @@ sudo systemctl enable mariadb.service
 sudo systemctl start mariadb
 # 查看MySQL状态
 sudo systemctl status mariadb
+#
 sudo /usr/bin/expect << EOF
 set timeout 60
 spawn /usr/local/mysql/bin/mariadb -u root -p
@@ -215,9 +217,9 @@ expect "mysql>" { send "quit;\r" }
 expect eof
 EOF
 # 重启MySQL
-sudo systemctl restart mysqld
+sudo systemctl restart mariadb
 # 查看MySQL状态
-sudo systemctl status mysqld
+sudo systemctl status mariadb
 # 清理
 sudo apt-get autoclean
 # 切换vagrant用户
