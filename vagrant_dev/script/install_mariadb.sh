@@ -23,8 +23,8 @@ sudo useradd -M -N -g mysql -o -r -d /home/mysql -s /usr/sbin/nologin -c "MySQL 
 # 查看是否新增用户成功
 awk '/mysql/{print $0}' /etc/passwd
 # 修改目录用户属性
-chown -R mysql:mysql /opt/app/mariadb /opt/workspace/mariadb
-chmod -R 750 /opt/app/mariadb /opt/workspace/mariadb
+sudo chown -R mysql:mysql /opt/app/mariadb /opt/workspace/mariadb
+sudo chmod -R 750 /opt/app/mariadb /opt/workspace/mariadb
 ### 查看GLIBC版本
 ldd --version
 # 下载MySQL二进制安装包
@@ -46,8 +46,8 @@ sudo tar xf /opt/backup/${mariadb_tar_name} \
 sudo mv /opt/app/mariadb/${mariadb_install_dir_name} /opt/app/mariadb/${mariadb_version}
 
 # 修改目录用户属性
-chown -R mysql:mysql /opt/app/mariadb
-chown -R mysql:mysql /opt/workspace/mariadb
+sudo chown -R mysql:mysql /opt/app/mariadb
+sudo chown -R mysql:mysql /opt/workspace/mariadb
 # 建立软链接
 sudo ln -s /opt/app/mariadb/${mariadb_version} /usr/local/mysql
 sudo chown -R mysql:mysql /usr/local/mysql
@@ -61,7 +61,7 @@ EOF
 # 环境变量生效
 source /etc/profile
 # 验证
-mysql -V
+mariadb -V
 # 创建MySQL配置文件
 sudo cat > /opt/workspace/mariadb/my.cnf << EOF
 ############################[client]###############################
@@ -140,11 +140,10 @@ EOF
 ln -s /opt/workspace/mariadb/my.cnf /usr/local/mysql/my.cnf
 
 # 初始化数据（默认root密码为空）
-sudo /usr/local/mysql/bin/mysqld \
+sudo /usr/local/mysql/scripts/mariadb-install-db \
  --user=mysql \
  --basedir=/usr/local/mysql \
- --datadir=/usr/local/mysql/data \
- --initialize
+ --datadir=/usr/local/mysql/data
 # 修改目录或者文件权限
 chown -R mysql:mysql /opt/app/mariadb
 chown -R mysql:mysql /opt/workspace/mariadb
